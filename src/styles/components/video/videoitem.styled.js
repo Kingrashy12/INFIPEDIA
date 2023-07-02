@@ -1,5 +1,18 @@
 import styled from "@emotion/styled";
 
+const StyledPlayContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  margin-top: 40px;
+  width: 100%;
+
+  @media screen and (max-width: 700px) {
+    margin-top: 30px;
+  }
+`;
+
 const StyledVideoItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -65,15 +78,29 @@ const PlayHeaderDetails = styled.div`
   }
 `;
 
+const PlayDeatilsContainer = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  @media screen and (max-width: 700px) {
+    padding: 10px;
+  }
+`;
+
 const VideoPlayWrapper = styled.div`
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   padding-top: 12px;
-  margin-top: 4rem;
   height: auto;
   margin-top: 0;
+
+  @media screen and (max-width: 700px) {
+    .v {
+      height: 400px;
+    }
+  }
 `;
 
 export {
@@ -83,4 +110,6 @@ export {
   StyledVideoItemVid,
   PlayHeaderDetails,
   VideoPlayWrapper,
+  PlayDeatilsContainer,
+  StyledPlayContainer,
 };

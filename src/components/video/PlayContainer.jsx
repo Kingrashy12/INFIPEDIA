@@ -7,6 +7,7 @@ import PlayDetails from "../user/video/PlayDetails";
 import UImge from "../user/UImge";
 import { FetchVideoLikes, FetchVideoViews } from "../../helper/fetch";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { StyledPlayContainer } from "../../styles/components/video/videoitem.styled";
 
 const PlayContainer = () => {
   const [vlikes, setVlikes] = useState([]);
@@ -44,21 +45,21 @@ const PlayContainer = () => {
       setVlikes(data);
     };
     getLikes();
-  });
+  }, [vlikes]);
   useEffect(() => {
     const getViews = async () => {
       const data = await FetchVideoViews(vId);
       setVviews(data);
     };
     getViews();
-  });
+  }, [vviews]);
   useEffect(() => {
     const getComments = async () => {
       const data = await FetchVideoComments(vId);
       setVcomments(data);
     };
     getComments();
-  });
+  }, [vcomments]);
 
   const like = vlikes.find((id) => id === auth?._id) ? (
     <AiFillHeart />
@@ -71,7 +72,7 @@ const PlayContainer = () => {
   });
 
   return (
-    <div className="flex gap-3 flex-col relative w-full mt-10">
+    <StyledPlayContainer>
       <PlayVideo play={play} isLoading={isLoading} liked={liked} />
       <PlayDetails
         play={play}
@@ -86,7 +87,7 @@ const PlayContainer = () => {
         comments={vcomments}
         like={like}
       />
-    </div>
+    </StyledPlayContainer>
   );
 };
 

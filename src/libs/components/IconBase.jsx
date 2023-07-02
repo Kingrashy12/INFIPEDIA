@@ -12,13 +12,14 @@ const IconWrap = ({
   loadingWidth,
   title,
   hasText,
+  onClick,
 }) => {
   return (
     <div title={title}>
       {isLoading ? (
         <Skeleton variant="text" width={loadingWidth} height={loadingHeight} />
       ) : (
-        <div className="flex flex-col">
+        <div className="flex flex-col text-justify" onClick={onClick}>
           <IconBase className={`${className}`} color={color}>
             <>{icon}</>
           </IconBase>

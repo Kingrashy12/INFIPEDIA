@@ -109,10 +109,10 @@ export async function CommentOnPost(data) {
   return response?.data;
 }
 
-export async function LikeVideo(data) {
+export async function LikeVideo(userId, videoId) {
   const response = await axios.patch(`${BASE_URL}/videos/like`, {
-    userId: data.userId,
-    videoId: data.videoId,
+    userId: userId,
+    videoId: videoId,
   });
   return response?.data;
 }

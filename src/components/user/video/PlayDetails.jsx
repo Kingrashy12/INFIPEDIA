@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  PlayDeatilsContainer,
   PlayHeaderDetails,
   PlayVideoDetails,
 } from "../../../styles/components/video/videoitem.styled";
@@ -8,6 +9,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FaCommentAlt, FaEye } from "react-icons/fa";
 import { FlexBetween } from "../../../styles/common/Global";
 import { CgSoftwareDownload } from "react-icons/cg";
+import { LikeVideo } from "../../../hooks/getUserById";
 
 const PlayDetails = ({
   play,
@@ -22,8 +24,14 @@ const PlayDetails = ({
   like,
   comments,
 }) => {
+  const userId = auth?._id;
+  const videoId = play._id;
+
+  async function likePlay() {
+    await LikeVideo(userId, videoId);
+  }
   return (
-    <div>
+    <PlayDeatilsContainer>
       <PlayHeaderDetails>
         <UserImage user={play} comment isLoading={isLoading} />
         <PlayVideoDetails>
@@ -77,6 +85,7 @@ const PlayDetails = ({
               isLoading={isLoading}
               loadingHeight={`40px`}
               loadingWidth={`40px`}
+              onClick={likePlay}
               hasText={
                 <Span
                   fontShare
@@ -138,7 +147,7 @@ const PlayDetails = ({
           </div>
         </FlexBetween>
       </div>
-    </div>
+    </PlayDeatilsContainer>
   );
 };
 
