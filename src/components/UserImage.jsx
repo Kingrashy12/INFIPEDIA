@@ -1,5 +1,5 @@
 import React from "react";
-import { Female, Male } from "../asset";
+import { Female, Male, PlaceholderImage } from "../asset";
 import { Skeleton } from "@mui/material";
 import { StyledImage } from "../styles/components/UserImage.styled";
 
@@ -40,7 +40,7 @@ const UserImage = ({
               style={{ borderRadius: "50%" }}
               className={`${className} w-20 h-20 relative ${
                 profile &&
-                "w-36 h-36 border-2 border-black max-[700px]:w-28 max-[700px]:h-28"
+                "w-36 h-36 border-2 border-black max-[700px]:w-32 max-[700px]:h-32"
               } rounded-full ${video && "w-9 h-9"} ${
                 comment && "w-68px h-68px max-[700px]:w-10 max-[700px]:h-8"
               } ${posts && "w-68px h-68px max-[700px]:w-12 max-[700px]:h-12"}`}
@@ -63,7 +63,7 @@ const UserImage = ({
             />
           ) : (
             <img
-              src={user?.gender === "male" ? Male : Female}
+              src={PlaceholderImage}
               style={{ borderRadius: "50%" }}
               className={`${className} w-20 h-20 ${
                 profile &&

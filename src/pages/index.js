@@ -4,7 +4,6 @@ export { default as Regsiter } from "./auth/Register";
 export { default as Profile } from "./user/Profile";
 export { default as Videos } from "./videos/Videos";
 export { default as VideoPlayWrap } from "./videos/VideoPlayWrap";
-export { default as TagedVideo } from "./videos/TagedVideo";
 export { default as Chat } from "./chats/Chat";
 export { default as MarketPlace } from "./marketplace/MarketPlace";
 export { default as ItemView } from "./marketplace/ItemView";

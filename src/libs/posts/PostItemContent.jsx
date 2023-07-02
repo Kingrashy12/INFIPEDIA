@@ -136,7 +136,7 @@ const PostItemContent = ({ post }) => {
                 <img
                   src={post?.userProfile?.url}
                   alt="Full Image"
-                  className="full-image rounded-full"
+                  className="full-image isp rounded-full"
                 />
               </div>
             ) : (
@@ -202,7 +202,7 @@ const PostItemContent = ({ post }) => {
           ) : (
             <Image
               src={post.postImg.url}
-              className="h-80 max-[700px]:h-10 relative cursor-pointer"
+              className="h-80 pimage relative cursor-pointer"
               alt="Post Image"
               variant="retangular"
               loadingWidth="100"
@@ -214,23 +214,19 @@ const PostItemContent = ({ post }) => {
       )}
       <div className="p-5">
         <hr />
-        <FlexBetween className="mt-2" onClick={(e) => e.stopPropagation()}>
+        <FlexBetween className="mt-2">
           <div className="flex gap-1">
             {liked ? (
               <AiFillHeart
                 size={25}
                 className="cursor-pointer text-red-500"
-                onClick={() => {
-                  onLike();
-                }}
+                onClick={onLike}
               />
             ) : (
               <AiOutlineHeart
                 size={25}
                 className="cursor-pointer text-red-500"
-                onClick={() => {
-                  onLike();
-                }}
+                onClick={onLike}
               />
             )}
             <span className="text-red-500">{post.likes?.length}</span>

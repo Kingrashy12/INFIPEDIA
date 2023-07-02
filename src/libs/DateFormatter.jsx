@@ -4,21 +4,23 @@ import moment from "moment";
 import { Skeleton } from "@mui/material";
 
 const DateFormatter = ({ item, isLoading, loadingWidth, loadingHeight }) => {
-  const convertToHourFormat = () => {
-    const createdAt = moment(item?.createdAt);
-    const hourFormat = createdAt.format("h[h]");
+  // const convertToHourFormat = () => {
+  //   const createdAt = moment(item?.createdAt);
+  //   const hourFormat = createdAt.format("h[h]");
 
-    return hourFormat;
-  };
-
-  //   const formattedTime = createdAt.toLocaleString("default", { month: "long" });
+  //   return hourFormat;
+  // };
+  const createdAt = new Date(item?.createdAt);
+  const day = createdAt.getDate();
+  const formattedTime = createdAt.toLocaleString("default", { month: "long" });
   return (
     <>
       {isLoading ? (
         <Skeleton variant="text" width={loadingWidth} height={loadingHeight} />
       ) : (
         <Libography
-          text={convertToHourFormat()}
+          // text={convertToHourFormat()}
+          text={`${day} ${formattedTime}`}
           fontSemiBold
           fontSofia
           loadingWidth="100px"

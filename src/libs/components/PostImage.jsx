@@ -1,7 +1,7 @@
 import React from "react";
 import { StyledPostImage } from "../../styles/libs/components/postimage.styled";
 import { Skeleton } from "@mui/material";
-import { Female, Male } from "../../asset";
+import { Female, Male, PlaceholderImage } from "../../asset";
 
 const PostImage = ({ user, isLoading, className, onClick }) => {
   return (
@@ -24,7 +24,7 @@ const PostImage = ({ user, isLoading, className, onClick }) => {
             <Skeleton variant="circular" width="40px" height="40px" />
           ) : (
             <StyledPostImage
-              src={user.gender === "male" ? Male : Female || Male}
+              src={PlaceholderImage}
               className={`${className}`}
               onClick={onClick}
             />

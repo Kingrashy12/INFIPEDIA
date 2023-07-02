@@ -6,6 +6,10 @@ const StyledViewedPostCommentSection = styled.div`
   position: relative;
   width: 100%;
   gap: 1rem;
+
+  @media screen and (max-width: 700px) {
+    gap: 5px;
+  }
 `;
 
 const StyledViewedPostCommentSectionContainer = styled.div`
@@ -13,6 +17,12 @@ const StyledViewedPostCommentSectionContainer = styled.div`
   flex-direction: column;
   width: 100%;
   position: relative;
+  background: #fff;
+  border-radius: 5px;
+
+  @media screen and (max-width: 700px) {
+    border-radius: 0;
+  }
 `;
 
 const StyledViewdCommentsForm = styled.div`
@@ -21,6 +31,10 @@ const StyledViewdCommentsForm = styled.div`
   background: #fff;
   gap: 9px;
   border-radius: 5px;
+
+  @media screen and (max-width: 700px) {
+    border-radius: 0;
+  }
 `;
 
 const ViwedCommentsFormImg = styled.img`

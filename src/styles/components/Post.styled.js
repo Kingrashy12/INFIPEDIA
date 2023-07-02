@@ -27,6 +27,9 @@ const StyledPostItemContainer = styled.div`
 
   @media (max-width: 700px) {
     border-radius: 0;
+    .pimage {
+      height: 250px;
+    }
   }
 `;
 

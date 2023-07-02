@@ -69,7 +69,9 @@ const SideNavII = () => {
         <hr className="mb- mt-2" />
         {sidenavdataII.map((item, index) => (
           <Link
-            to={item.link}
+            to={
+              !auth?._id && item.label === "Setting" ? "/auth/login" : item.link
+            }
             className="flex gap-1 h-auto items-center relative"
             key={index}
           >

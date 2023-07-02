@@ -98,3 +98,37 @@ export async function getStatusPosts(username, postId) {
   );
   return response?.data;
 }
+
+export async function CommentOnPost(data) {
+  const response = await axios.patch(`${BASE_URL}/posts/comment`, {
+    postId: data.postId,
+    userId: data.userId,
+    text: data.text,
+    commentsImg: data.commentsImg,
+  });
+  return response?.data;
+}
+
+export async function LikeVideo(data) {
+  const response = await axios.patch(`${BASE_URL}/videos/like`, {
+    userId: data.userId,
+    videoId: data.videoId,
+  });
+  return response?.data;
+}
+
+export async function CommentsOnPost(data) {
+  const response = await axios.patch(`${BASE_URL}/videos/comments`, {
+    text: data.text,
+    userId: data.userId,
+    videoId: data.videoId,
+  });
+  return response?.data;
+}
+
+export async function FetchVideoComments(videoId) {
+  const response = await axios.get(
+    `${BASE_URL}/videos/comments/all/${videoId}`
+  );
+  return response?.data;
+}

@@ -9,6 +9,10 @@ const StyledVideoItem = styled.div`
   position: relative;
   padding-bottom: 1rem;
   margin-top: 5rem;
+
+  @media screen and (max-width: 700px) {
+    margin-top: 2rem;
+  }
 `;
 
 const StyledVideoWrapper = styled.div`

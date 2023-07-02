@@ -63,7 +63,8 @@ const PostViewItem = ({ posts, isLoading }) => {
       <TruncatedText
         loadingWidth="100"
         loadingHeight="80px"
-        className="flex text-sm cursor-pointer p-2"
+        className="flex text-sm cursor-pointer p-3"
+        fontMedium
         text={posts?.body}
         maxLength={max}
         underText={less ? h : s}

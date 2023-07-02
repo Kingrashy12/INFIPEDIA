@@ -6,7 +6,7 @@ import ViewedPostCommentsContainer from "./ViewedPostCommentsContainer";
 const PostViewComments = ({ post, isLoading }) => {
   return (
     <StyledViewedPostCommentSection>
-      <ViewedPostComments />
+      <ViewedPostComments post={post} />
       <div className="flex flex-col gap-3">
         {post?.comments?.map((comment, index) => (
           <ViewedPostCommentsContainer

@@ -8,6 +8,7 @@ const StyledNotify = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
+  overflow-y: auto;
 
   @media screen and (max-width: 1024px) {
     width: 60%;
@@ -24,7 +25,7 @@ const StyledNotWrapper = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   padding: 2rem;
   transform: translateY(4rem);
 

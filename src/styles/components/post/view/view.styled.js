@@ -6,7 +6,6 @@ const StyledViewContainer = styled.div`
   position: relative;
   width: 100%;
   margin-top: 5rem;
-  padding: 10px;
   background: #fff;
   border-radius: 4px;
 
@@ -26,13 +25,17 @@ const StyledViewUserDeatils = styled.div`
   display: flex;
   width: 100%;
   gap: 1rem;
+  padding: 10px;
 `;
 
 const StyledViewPostImage = styled.img`
   width: 100%;
   height: 400px;
-  border-radius: 10px;
   margin-bottom: 9px;
+
+  @media screen and (max-width: 700px) {
+    height: 300px;
+  }
 `;
 
 export {

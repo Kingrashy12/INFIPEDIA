@@ -66,7 +66,9 @@ const SideNavLinks = () => {
         <hr className="mb-2 mt-2" />
         {chatnavdataII.map((item, index) => (
           <Link
-            to={item.link}
+            to={
+              !auth?._id && item.title === "Setting" ? "/auth/login" : item.link
+            }
             className="flex gap-1 h-auto items-center relative"
             key={index}
           >

@@ -21,7 +21,6 @@ import {
   Saved,
   SecurityAndAccess,
   Settings,
-  TagedVideo,
   VideoPlayWrap,
   Videos,
   YourInfo,
@@ -60,7 +59,6 @@ function App() {
           <Route path="/:username" element={<Profile />} />
           <Route path="/videos" element={<Videos />} />
           <Route path="/video/:videoId" element={<VideoPlayWrap />} />
-          <Route path="/video/:videoTag" element={<TagedVideo />} />
           <Route path="/messages" element={<Chat />} />
           <Route path="/store" element={<MarketPlace />} />
           <Route path="/store/:title" element={<ItemView />} />

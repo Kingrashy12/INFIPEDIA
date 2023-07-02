@@ -30,20 +30,20 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (!auth?._id) {
-      return null;
-    } else {
-      const fetchUnreadNotifications = async () => {
-        try {
-          const data = await getNotification(userId);
-          const notifications = data.filter(
-            (notification) => !notification.isRead
-          );
-          setUnreadNotifications(notifications);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+    // if (!auth?._id) {
+    //   return null;
+    // } else {
+    const fetchUnreadNotifications = async () => {
+      try {
+        const data = await getNotification(userId);
+        const notifications = data.filter(
+          (notification) => !notification.isRead
+        );
+        setUnreadNotifications(notifications);
+      } catch (error) {
+        console.error(error);
+      }
+      // };
 
       // Fetch unread notifications initially
       fetchUnreadNotifications();
@@ -53,7 +53,7 @@ const Navbar = () => {
 
       // Clean up interval on component unmount
       return () => clearInterval(interval);
-    }
+    };
   }, []);
 
   async function openAlert() {

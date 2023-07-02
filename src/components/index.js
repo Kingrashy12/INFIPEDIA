@@ -2,7 +2,6 @@ export { default as ScrollTop } from "./ScrollTop";
 export { default as Navbar } from "./layout/Navbar";
 export { default as Footer } from "./layout/Footer";
 export { default as BottomNav } from "./layout/BottomNav";
-export { default as SideNav } from "./layout/SideNav";
 export { default as RightNav } from "./layout/RightNav";
 export { default as PostFeed } from "./posts/PostFeed";
 export { default as LoginModel } from "./models/LoginModel";
