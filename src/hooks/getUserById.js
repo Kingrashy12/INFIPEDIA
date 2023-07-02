@@ -126,9 +126,7 @@ export async function CommentsOnPost(data) {
   return response?.data;
 }
 
-export async function FetchVideoComments(videoId) {
-  const response = await axios.get(
-    `${BASE_URL}/videos/comments/all/${videoId}`
-  );
+export async function FetchVideoComments(vId) {
+  const response = await axios.get(`${BASE_URL}/videos/comments/all/${vId}`);
   return response?.data;
 }

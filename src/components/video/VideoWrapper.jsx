@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import UserImage from "../UserImage";
 import { useNavigate } from "react-router-dom";
 import { Libography, Span, Video } from "../../libs";
 import { Skeleton } from "@mui/material";
 import { StyledVideoWrapper } from "../../styles/components/video/videoitem.styled";
+import UImge from "../user/UImge";
+import { ViewVideo } from "../../helper/fetch";
+import { useSelector } from "react-redux";
 
 const VideoWrapper = ({ video }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const userId = useSelector((state) => state.credentails?._id);
+  const videoId = video._id;
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,9 +25,9 @@ const VideoWrapper = ({ video }) => {
 
     navigate(`/${video.username}`);
   }
-  function playVideo(e) {
+  async function playVideo(e) {
     e.stopPropagation();
-
+    await ViewVideo(userId, videoId);
     navigate(`/video/${video._id}`);
   }
   return (
@@ -43,7 +47,7 @@ const VideoWrapper = ({ video }) => {
         onClick={isLoading ? null : playVideo}
       >
         <div className="flex gap-2 items-center">
-          <UserImage user={video} video isLoading={isLoading} />
+          <UImge user={video} isLoading={isLoading} />
           <div className="flex flex-col gap-0">
             <Libography
               fontSofia

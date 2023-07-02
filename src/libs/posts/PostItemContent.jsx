@@ -1,7 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FlexBetween } from "../../styles/common/Global";
-import { Image, Libography, PostImage, Span, TruncatedText } from "../../libs";
+import {
+  DateFormatter,
+  Image,
+  Libography,
+  PostImage,
+  Span,
+  TruncatedText,
+} from "../../libs";
 import { CgComment } from "react-icons/cg";
 import {
   MdBookmarks,
@@ -156,14 +163,15 @@ const PostItemContent = ({ post }) => {
                 text={post.name}
                 onClick={goToUser}
               />
-              <Libography
+              {/* <Libography
                 fontSemiBold
                 fontSofia
                 loadingWidth="100px"
                 loadingHeight="25px"
                 className="text-neutral-500 text-xs flex -translate-y-1"
                 text={createdAt}
-              />
+              /> */}
+              <DateFormatter item={post} />
             </div>
             {post?.verified && (
               <MdVerified color="#f95f35" className="translate-y-[6px]" />

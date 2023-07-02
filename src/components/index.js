@@ -8,7 +8,7 @@ export { default as LoginModel } from "./models/LoginModel";
 export { default as ProfileCard } from "./user/ProfileCard";
 export { default as VideosWrapper } from "./video/VideoWrapper";
 export { default as VideoItem } from "./video/VideoItem";
-export { default as PlayVideo } from "./video/PlayVideo";
+export { default as PlayContainer } from "./video/PlayContainer";
 export { default as VideoTag } from "./layout/VideoTag";
 export { default as VideoByTag } from "./video/VideoByTag";
 export { default as SideNavLinks } from "./layout/chat/SideNavLinks";
