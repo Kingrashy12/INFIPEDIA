@@ -3,7 +3,13 @@ import Libography from "./Texts/Libography";
 import moment from "moment";
 import { Skeleton } from "@mui/material";
 
-const DateFormatter = ({ item, isLoading, loadingWidth, loadingHeight }) => {
+const DateFormatter = ({
+  item,
+  isLoading,
+  loadingWidth,
+  loadingHeight,
+  className,
+}) => {
   // const convertToHourFormat = () => {
   //   const createdAt = moment(item?.createdAt);
   //   const hourFormat = createdAt.format("h[h]");
@@ -25,7 +31,7 @@ const DateFormatter = ({ item, isLoading, loadingWidth, loadingHeight }) => {
           fontSofia
           loadingWidth="100px"
           loadingHeight="25px"
-          className="text-neutral-500 text-sm flex -translate-y-1"
+          className={`text-neutral-500 text-sm flex -translate-y-1 ${className}`}
         />
       )}
     </>

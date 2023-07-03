@@ -119,6 +119,21 @@ const PostItemContent = ({ post, likes, commentsdata, liked }) => {
     navigate(`/${post.username}`);
   }
 
+  const l = (
+    <div className="flex items-center gap-1 text-red-500">
+      {/* <AiFillHeart className="text-red-600" size={20} /> */}
+      <Libography text={likes.length} />
+      <Libography text="likes" />
+    </div>
+  );
+  const c = (
+    <div className="flex items-center gap-1 text-blue-500">
+      {/* <AiFillHeart className="text-red-600" size={20} /> */}
+      <Libography text={commentsdata.length} />
+      <Libography text="comments" />
+    </div>
+  );
+
   return (
     <StyledPostItemContainer className="shadow shadow-black">
       <div className="flex flex-col p-3">
@@ -204,6 +219,10 @@ const PostItemContent = ({ post, likes, commentsdata, liked }) => {
         </>
       )}
       <div className="p-5">
+        <FlexBetween>
+          <Libography fontSofia text={l} className="text-sm" />
+          <Libography fontSofia text={c} className="text-sm" />
+        </FlexBetween>
         <hr />
         <FlexBetween className="mt-2">
           <div className="flex gap-1">
@@ -220,14 +239,12 @@ const PostItemContent = ({ post, likes, commentsdata, liked }) => {
                 onClick={onLike}
               />
             )}
-            <span className="text-red-500">{likes?.length}</span>
           </div>
           <div
             className="flex gap-1 items-center cursor-pointer"
             onClick={comments}
           >
             <CgComment size={23} className="text-blue-500" />
-            <span className="text-blue-500">{commentsdata?.length}</span>
           </div>
           <div
             className="flex gap-1 items-center cursor-pointer"

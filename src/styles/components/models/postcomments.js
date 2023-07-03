@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
 const StyledPComments = styled.div`
+  width: 35%;
+  background: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 8px;
+  height: 40%;
+  overflow-y: auto;
+
   @media screen and (max-width: 1024px) {
     width: 60%;
   }
@@ -10,6 +20,13 @@ const StyledPComments = styled.div`
   @media screen and (max-width: 700px) {
     width: 95%;
   }
+`;
+
+const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `;
 
 const CommentsFormWrapper = styled.nav`
@@ -50,12 +67,16 @@ const CommentsAvatar = styled.img`
 
 const CommentsWrapper = styled.div`
   position: relative;
-  overflow-y: auto;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  gap: 1rem;
+  gap: 9px;
+  padding: 7px;
+`;
+
+const PostCommentsDImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
 `;
 
 const FixedComments = styled.div`
@@ -86,4 +107,6 @@ export {
   CommentsAvatar,
   CommentsWrapper,
   FixedComments,
+  PostCommentsDImage,
+  FormWrapper,
 };

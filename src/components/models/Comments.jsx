@@ -1,79 +1,100 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FlexBetween } from "../../styles/common/Global";
-import { HeaderOne, Libography } from "../../libs";
+import { DateFormatter, Libography, TruncatedText } from "../../libs";
 import { IoClose } from "react-icons/io5";
 import {
   CommentsWrapper,
-  FixedComments,
+  FormWrapper,
+  PostCommentsDImage,
   StyledPComments,
 } from "../../styles/components/models/postcomments";
-import CommentsForm from "../form/CommentsForm";
-import CAvatar from "../user/CAvatar";
-import { Male } from "../../asset";
-import { BiLike } from "react-icons/bi";
+import { PlaceholderImage } from "../../asset";
 import { useSelector } from "react-redux";
-import { AiFillLike } from "react-icons/ai";
+import { MdVerified } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { Textarea } from "@mui/joy";
+import CommentsForm from "../form/CommentsForm";
 
 const Comments = ({ setOpen, post, cId }) => {
   const auth = useSelector((state) => state.credentails);
+  const navigate = useNavigate();
+  const [photo, setPhoto] = useState(null);
+  const [text, setText] = useState({
+    text: "",
+    postId: post?._id,
+    userId: auth?._id,
+    commentsImg: "",
+  });
+
+  const c = (
+    <div className="flex gap-1 p-3">
+      <Libography text="Comments on" />
+      <Libography
+        className="text-blue-500 cursor-pointer hover:underline"
+        text={`@${post?.username}`}
+        onClick={() => navigate(`/${post?.username}`)}
+      />
+      <Libography text="post" />
+    </div>
+  );
+
   return (
-    <div className="fixed w-full h-full flex justify-center items-center">
-      <StyledPComments className="flex flex-col w-1/3 h-1/2 relative bg-black p-0 overflow-auto rounded-lg">
-        <FlexBetween className="fixed w-full border-b border-b-neutral-600 p-2">
-          <HeaderOne
-            fontSemiBold
-            fontSofia
-            text="Comments"
-            className="text-white text-2xl"
+    <StyledPComments className="shadow shadow-slate-800">
+      <FormWrapper>
+        <IoClose
+          size={30}
+          onClick={() => setOpen(false)}
+          className="text-white p-1 bg-neutral-400 cursor-pointer rounded-full mb-2"
+        />
+
+        <CommentsWrapper>
+          <PostCommentsDImage src={post?.userProfile?.url} />
+          <div className="flex flex-col">
+            <div className="flex items-center gap-1">
+              <Libography fontSofia text={post.name} className="text-[18px]" />
+              {post?.verified && <MdVerified size={20} color="#f95f35" />}
+              <Libography fontExtra text="-" />
+              <DateFormatter item={post} className="translate-y-0" />
+            </div>
+            <TruncatedText
+              maxLength={70}
+              text={post?.body}
+              fontPoppins
+              fontMedium
+            />
+          </div>
+        </CommentsWrapper>
+
+        <Libography fontSofia text={c} />
+        <FlexBetween>
+          <PostCommentsDImage
+            src={auth?.userProfile?.url || PlaceholderImage}
           />
-          <IoClose
-            size={30}
-            onClick={() => setOpen(false)}
-            className="text-white p-1 bg-neutral-400 cursor-pointer rounded-full"
+          <Textarea
+            placeholder="What your comment!"
+            sx={{
+              color: "#000",
+              fontWeight: 600,
+              fontFamily: "'Sofia Sans Semi Condensed', sans-serif",
+              "::placeholder": { color: "#000" },
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+            }}
+            color="#000"
+            value={text.text}
+            onChange={(e) => setText({ ...text, text: e.target.value })}
           />
         </FlexBetween>
-        <CommentsWrapper>
-          {post.comments?.map((c, index) => (
-            <div className="flex flex-col gap-2 pb-5" key={index}>
-              <div className="flex gap-2">
-                <CAvatar src={c.userProfile.url || Male} />
-                <Libography
-                  fontSemiBold
-                  fontSofia
-                  text={c.name}
-                  className="text-white text-base"
-                />
-              </div>
-              <Libography
-                fontSemiBold
-                fontSofia
-                text={c.text}
-                className="text-white text-base"
-              />
-              <div className="flex gap-1">
-                {auth?._id === c.userId ? (
-                  <AiFillLike
-                    size={20}
-                    className="text-red-600 cursor-pointer"
-                  />
-                ) : (
-                  <BiLike size={20} className="text-red-600 cursor-pointer" />
-                )}
-                <Libography
-                  fontSemiBold
-                  fontSofia
-                  text={c.likes?.length}
-                  className="text-red-600"
-                />
-              </div>
-            </div>
-          ))}
-        </CommentsWrapper>
-        <FixedComments className="fixed w-1/3 bottom-48 p-5">
-          <CommentsForm post={post} currentPostId={post.id} />
-        </FixedComments>
-      </StyledPComments>
-    </div>
+        <CommentsForm
+          post={post}
+          currentPostId={post.id}
+          text={text}
+          setText={setText}
+          Close={setOpen}
+        />
+      </FormWrapper>
+    </StyledPComments>
   );
 };
 

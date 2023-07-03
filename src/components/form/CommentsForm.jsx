@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   CommentsFormWrapper,
   CommentsInput,
@@ -7,73 +7,68 @@ import { Button } from "../../libs";
 import CAvatar from "../user/CAvatar";
 import { useDispatch, useSelector } from "react-redux";
 import { CommentsOnPost, getAllPosts } from "../../store/PostSlice";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { BASE_URL } from "../../hooks/api";
+import { IoMdPhotos } from "react-icons/io";
+import { CommentOnPost } from "../../hooks/getUserById";
 
-const CommentsForm = ({ post, currentPostId }) => {
+const CommentsForm = ({ post, text, setText, setPhoto, Close }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.credentails);
-  const [text, setText] = useState({
-    body: "",
-    postId: currentPostId,
-    userId: auth?._id,
-  });
-  const [loading, setLoading] = useState(false);
-  const cstatus = useSelector((state) => state.posts.commentStatus);
+  const [isLoading, setIsLoading] = useState(false);
+  const imgRef = useRef();
 
-  function keyComments(e) {
-    setText({ ...text, body: e.target.value });
-  }
+  const onImageChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    TransformFile(file);
+  };
+
+  const TransformFile = (file) => {
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setPhoto(reader.result);
+        setText({ ...text, commentsImg: reader.result });
+      };
+    } else {
+      setPhoto("");
+    }
+  };
+
+  const cstatus = useSelector((state) => state.posts.commentStatus);
+  // const isLoading = cstatus === "pending";
 
   async function add() {
+    setIsLoading(true);
     // dispatch(CommentsOnPost(text));
-    setLoading(true);
-    try {
-      await axios.patch(`${BASE_URL}/posts/comment`, {
-        text: text.body,
-        postId: post._id,
-        userId: auth?._id,
-      });
-      toast.success(`You commented on ${post.name}'s Post`, {
-        position: "top-center",
-      });
-      setText({ ...text, body: "" });
-    } catch (error) {
-      console.log({ error: error.message });
-      toast.error({ error: error.message }, { position: "top-center" });
-    } finally {
-      setLoading(false);
-      dispatch(getAllPosts());
-    }
+    await CommentOnPost(text);
+    setText({ ...text, body: "" });
+    setIsLoading(false);
+    Close(false);
   }
-  useEffect(() => {
-    const input = document.getElementById("input");
-    input.addEventListener("keyup", (e) => {
-      if (e.key === "Enter") {
-        add();
-      }
-    });
-  }, []);
 
   return (
     <CommentsFormWrapper>
-      <CAvatar src={auth?.userProfile?.url} />
-      <CommentsInput
-        id="input"
-        placeholder={`What your comments?`}
-        value={text.body}
-        onChange={keyComments}
-        // onKeyDownCapture={() => alert("entered")}
-        className="bg-slate-400 outline-none placeholder:text-black font-sofia font-semibold text-black"
+      <IoMdPhotos
+        className="text-green-500 cursor-pointer"
+        size={25}
+        onClick={() => {
+          imgRef.current.click();
+        }}
       />
+
       <Button
         text="Comment"
         isCurrentBg
-        disabled={!text.body}
+        disabled={!text.text || isLoading}
         onClick={add}
-        isLoading={loading}
-        // isLoading={cstatus === "pending"}
+        isLoading={isLoading}
+      />
+      <input
+        type="file"
+        ref={imgRef}
+        className="hidden"
+        onChange={onImageChange}
       />
     </CommentsFormWrapper>
   );

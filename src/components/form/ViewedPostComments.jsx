@@ -26,8 +26,6 @@ const ViewedPostComments = ({ post }) => {
     postId: post?._id,
   });
 
-  console.log("comments data:", data);
-
   const onImageChange = (e) => {
     const file = e.target.files[0];
     console.log(file);

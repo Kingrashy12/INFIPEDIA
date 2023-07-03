@@ -117,7 +117,7 @@ export async function LikeVideo(userId, videoId) {
   return response?.data;
 }
 
-export async function CommentsOnPost(data) {
+export async function CommentsOnVideo(data) {
   const response = await axios.patch(`${BASE_URL}/videos/comments`, {
     text: data.text,
     userId: data.userId,
