@@ -27,9 +27,8 @@ import { likePost, savePost, unSavePost } from "../../store/PostSlice";
 import { useNavigate } from "react-router-dom";
 import { StyledPostItemContainer } from "../../styles/components/Post.styled";
 
-const PostItemContent = ({ post }) => {
+const PostItemContent = ({ post, likes, commentsdata, liked }) => {
   const auth = useSelector((state) => state.credentails);
-  const [liked, setLiked] = useState(false);
   const [tag, setTag] = useState(false);
   const [open, setOpen] = useState(false);
   const [openShare, setOpenShare] = useState(false);
@@ -87,13 +86,6 @@ const PostItemContent = ({ post }) => {
     }
   }
 
-  useEffect(() => {
-    if (post.likes.includes(auth?._id)) {
-      setLiked(true);
-    } else {
-      setLiked(false);
-    }
-  }, [post]);
   const createdAt = useMemo(() => {
     if (!post?.createdAt) {
       return null;
@@ -128,10 +120,7 @@ const PostItemContent = ({ post }) => {
   }
 
   return (
-    <StyledPostItemContainer
-      className="shadow shadow-black"
-      onClick={() => navigate(`/${post?.username}/status/${post?._id}`)}
-    >
+    <StyledPostItemContainer className="shadow shadow-black">
       <div className="flex flex-col p-3">
         <FlexBetween>
           <div className="flex gap-2">
@@ -163,14 +152,7 @@ const PostItemContent = ({ post }) => {
                 text={post.name}
                 onClick={goToUser}
               />
-              {/* <Libography
-                fontSemiBold
-                fontSofia
-                loadingWidth="100px"
-                loadingHeight="25px"
-                className="text-neutral-500 text-xs flex -translate-y-1"
-                text={createdAt}
-              /> */}
+
               <DateFormatter item={post} />
             </div>
             {post?.verified && (
@@ -195,6 +177,7 @@ const PostItemContent = ({ post }) => {
           maxLength={max}
           underText={less ? h : s}
           fontPoppins
+          onClick={() => navigate(`/${post?.username}/status/${post?._id}`)}
         />
       </div>
       {post?.postImg && (
@@ -226,25 +209,25 @@ const PostItemContent = ({ post }) => {
           <div className="flex gap-1">
             {liked ? (
               <AiFillHeart
-                size={25}
-                className="cursor-pointer text-red-500"
+                size={30}
+                className="cursor-pointer text-red-500 hover:bg-red-300 p-1 rounded-full"
                 onClick={onLike}
               />
             ) : (
               <AiOutlineHeart
-                size={25}
-                className="cursor-pointer text-red-500"
+                size={30}
+                className="cursor-pointer text-red-500 hover:bg-red-300 p-1 rounded-full"
                 onClick={onLike}
               />
             )}
-            <span className="text-red-500">{post.likes?.length}</span>
+            <span className="text-red-500">{likes?.length}</span>
           </div>
           <div
             className="flex gap-1 items-center cursor-pointer"
             onClick={comments}
           >
             <CgComment size={23} className="text-blue-500" />
-            <span className="text-blue-500">{post.comments?.length}</span>
+            <span className="text-blue-500">{commentsdata?.length}</span>
           </div>
           <div
             className="flex gap-1 items-center cursor-pointer"

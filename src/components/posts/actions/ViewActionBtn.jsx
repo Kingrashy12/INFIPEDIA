@@ -8,11 +8,10 @@ import { CgComment } from "react-icons/cg";
 import { MdBookmarks, MdIosShare, MdOutlineBookmarks } from "react-icons/md";
 import { Skeleton } from "@mui/material";
 
-const ViewActionBtn = ({ post, isLoading }) => {
+const ViewActionBtn = ({ post, isLoading, liked, likes, comments }) => {
   const user = useSelector((state) => state.credentails);
   const check = useSelector((state) => state.posts.savedPosts);
   const ava = check.find((item) => item._id === post?._id);
-  const liked = post?.likes?.includes(user?._id);
   const [openShare, setOpenShare] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -77,9 +76,7 @@ const ViewActionBtn = ({ post, isLoading }) => {
                 }}
               />
             )}
-            <span className="text-red-500 text-[14px]">
-              {post?.likes?.length}
-            </span>
+            <span className="text-red-500 text-[14px]">{likes?.length}</span>
           </div>
           <div
             className="flex items-center cursor-pointer"
@@ -90,7 +87,7 @@ const ViewActionBtn = ({ post, isLoading }) => {
               className="text-blue-500 hover:bg-blue-300 p-1 hover:rounded-full"
             />
             <span className="text-blue-500 text-[14px]">
-              {post?.comments?.length}
+              {comments?.length}
             </span>
           </div>
           <div

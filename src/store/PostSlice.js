@@ -22,9 +22,6 @@ const initialState = {
   deleteError: null,
   postStatus: null,
   postError: null,
-  UserLiked: [],
-  ulikeStatus: null,
-  ulikeError: null,
   fetchTagStatus: null,
   fetchTagError: null,
   tagStatus: null,
@@ -121,21 +118,6 @@ export const deletePost = createAsyncThunk(
     try {
       const response = await axios.patch(`${BASE_URL}/posts/delete`, {
         postId,
-      });
-      return response?.data;
-    } catch (error) {
-      console.log(error.message);
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const getUserLiked = createAsyncThunk(
-  "post/user-liked",
-  async (user, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/posts/likes/find`, {
-        userId: user.userId,
       });
       return response?.data;
     } catch (error) {
@@ -366,17 +348,6 @@ const PostSlice = createSlice({
       toast.success(`Success`, {
         postion: "top-center",
       });
-    },
-    [getUserLiked.pending]: (state, action) => {
-      state.ulikeStatus = "pending";
-    },
-    [getUserLiked.fulfilled]: (state, action) => {
-      state.ulikeStatus = "success";
-      state.UserLiked = action.payload;
-    },
-    [getUserLiked.rejected]: (state, action) => {
-      state.ulikeStatus = "rejected";
-      state.ulikeError = action.payload;
     },
     [getAllTagPost.pending]: (state, action) => {
       state.fetchTagStatus = "pending";

@@ -12,7 +12,7 @@ import ViewActionBtn from "./actions/ViewActionBtn";
 import PostviewImage from "../user/info/postviewImage";
 import ViewdPostImage from "./ViewdPostImage";
 
-const PostViewItem = ({ posts, isLoading }) => {
+const PostViewItem = ({ posts, isLoading, liked, likes, comments }) => {
   const navigate = useNavigate();
   const [max, setMax] = useState(70);
   const [less, setLess] = useState(false);
@@ -78,7 +78,13 @@ const PostViewItem = ({ posts, isLoading }) => {
         ""
       )}
       <hr />
-      <ViewActionBtn post={posts} isLoading={isLoading} />
+      <ViewActionBtn
+        post={posts}
+        isLoading={isLoading}
+        liked={liked}
+        likes={likes}
+        comments={comments}
+      />
     </StyledViewContainer>
   );
 };

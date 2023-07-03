@@ -73,13 +73,13 @@ body,
 .full-image {
   max-width: 90%;
   height: 100%;
-  border-radius: 8px;
   /* Add any additional styling for the full-size image */
 }
 
 @media screen and (max-width: 700px) {
   .full-image {
     height: 70%;
+    border-radius: 8px;
   }
   .isp {
     border-radius: 9999px;

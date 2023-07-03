@@ -26,3 +26,12 @@ export async function FetchVideoLikes(vId) {
   const response = await axios.get(`${BASE_URL}/videos/likes/all/${vId}`);
   return response?.data;
 }
+
+export async function FetchPostLikes(postId) {
+  const response = await axios.get(`${BASE_URL}/posts/likes/all/${postId}`);
+  return response?.data;
+}
+export async function FetchPostComments(postId) {
+  const response = await axios.get(`${BASE_URL}/posts/comments/all/${postId}`);
+  return response?.data;
+}
