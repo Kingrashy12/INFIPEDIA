@@ -20,6 +20,9 @@ const StyledEmptyBuk = styled.div`
     svg {
       font-size: 3rem;
     }
+    p {
+      padding: 8px;
+    }
   }
 `;
 

@@ -31,10 +31,12 @@ import {
   InternetStatus,
   Navbar,
   ScrollTop,
+  ShareModal,
 } from "./components";
 import { ThemeProvider } from "styled-components";
 import { BlurBg, GlobalStyles } from "./styles/Global";
 import { useSelector } from "react-redux";
+import SearchModal from "./components/models/SearchModal";
 
 function App() {
   const theme = {
@@ -55,6 +57,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Navbar />
+        <SearchModal />
+        <ShareModal />
         <BlurBg style={{ top: "-1%", right: "5rem" }} />
         <BlurBg style={{ top: "36%", left: "2rem" }} />
         <ToastContainer />

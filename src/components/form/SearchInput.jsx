@@ -5,6 +5,7 @@ import {
   ResultContainer,
   SearchResultP,
   StyledSearch,
+  StyledSearchConatiner,
   StyledSearchImg,
 } from "../../styles/components/SearchInput.styled";
 import { useSelector } from "react-redux";
@@ -20,7 +21,7 @@ const SearchInput = () => {
     setText("");
   };
   return (
-    <div className="relative flex flex-col">
+    <StyledSearchConatiner className="relative flex flex-col">
       <StyledSearch
         className={`flex items-center bg-slate-800 p-2 ${
           text ? "rounded-t-lg" : "rounded-lg"
@@ -76,7 +77,7 @@ const SearchInput = () => {
             ))}
         </ResultContainer>
       )}
-    </div>
+    </StyledSearchConatiner>
   );
 };
 

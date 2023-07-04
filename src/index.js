@@ -13,7 +13,7 @@ import UsersReducer, { FetchAllUsers } from "./store/UsersSlice";
 import communityReducer, { FetchAllCommunity } from "./store/communitySlice";
 import { communityApi } from "./store/communityApi";
 import chatReducer from "./store/chatSlice";
-import TrendReducer from "./store/TrendSlice";
+import TrendReducer, { getTrends } from "./store/TrendSlice";
 
 const store = configureStore({
   reducer: {
@@ -36,7 +36,8 @@ store.dispatch(FetchAllCommunity());
 store.dispatch(getAllTagPost());
 store.dispatch(FetchAllUsers());
 store.dispatch(FetcVideos());
-// store.dispatch(getAllPosts());
+store.dispatch(getAllPosts());
+store.dispatch(getTrends());
 store.dispatch(loadUser(null));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

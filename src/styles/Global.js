@@ -66,7 +66,7 @@ body{
 
 @media screen and (max-width: 700px) {
   .logo{
-    font-size: 20px;
+    font-size: 24px;
   }
 }
 `;

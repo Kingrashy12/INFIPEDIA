@@ -29,7 +29,7 @@ const StyledRightSideNavWrapp = styled.nav`
 const StyledRightSideNavWrappI = styled.nav`
   width: 28rem;
   height: 100%;
-  position: relative;
+  position: fixed;
   @media (max-width: ${({ theme }) => theme.tab}) {
     width: 23rem;
   }

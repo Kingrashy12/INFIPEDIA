@@ -16,7 +16,6 @@ const EditEmailModal = () => {
   const dispatch = useDispatch();
   const userId = user?._id;
   const isLoading = user.emailupdatedStatus === "pending";
-  //   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     email: user?.email,
     userId: userId,
@@ -27,10 +26,7 @@ const EditEmailModal = () => {
     emailmodal.onClose();
   };
   async function updateEmail() {
-    //   setIsLoading(true);
     dispatch(UpdateEmail(data, userId));
-    // await Updatedemail(data, userId);
-    // setIsLoading(false);
   }
 
   const child = (

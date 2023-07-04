@@ -10,6 +10,7 @@ import useScrollDirection from "../../hooks/useScrollDirection";
 import TagFeed from "../posts/tag/TagFeed";
 import FollowingPostFeed from "../posts/followingpost/FollowingPostFeed";
 import { useSelector } from "react-redux";
+import Share from "../posts/Share";
 
 const HomeContent = () => {
   const [For, setFor] = useState(true);
@@ -70,6 +71,7 @@ const HomeContent = () => {
       {For && <PostFeed />}
       {tag && <TagFeed />}
       {fol && <FollowingPostFeed currentUserId={currentUserId} />}
+      <Share />
     </StyledHomeContent>
   );
 };

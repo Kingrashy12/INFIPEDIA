@@ -2,19 +2,17 @@ import React, { useRef, useState } from "react";
 import { Libography } from "../../libs";
 import { FlexBetween } from "../../styles/common/Global";
 import { MdSettings } from "react-icons/md";
-import { BsFillGridFill, BsList } from "react-icons/bs";
+import { BsList } from "react-icons/bs";
 import {
   FilterDivider,
   PostFilterContainer,
 } from "../../styles/components/post/userpost.styled";
 import { FaTags } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import { Backdrop } from "@mui/material";
 import ManagePost from "../models/ManagePost";
 
 const UserPostFilter = ({ list, setList, tag, setTag, userId, post }) => {
   const [open, setOpen] = useState(false);
-  const postRef = useRef();
   const filter = (
     <div className="flex items-center gap-1">
       <MdSettings className="text-[20px]" />

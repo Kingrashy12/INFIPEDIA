@@ -96,7 +96,7 @@ const HPostForm = () => {
             "::placeholder": { color: "#000" },
           }}
           autoComplete="Yes"
-          placeholder={`What your comments, ${auth?.username}?`}
+          placeholder={`What on your mind today, ${auth?.username}?`}
           value={data.desc}
           onChange={(e) => setData({ ...data, desc: e.target.value })}
         />

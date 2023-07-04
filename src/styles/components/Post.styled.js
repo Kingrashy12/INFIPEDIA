@@ -2,19 +2,19 @@ import styled from "styled-components";
 
 const StyledPostWrapper = styled.div`
   width: 100%;
-  /* @media (max-width: ${({ theme }) => theme.tab}) {
-    width: 80%;
-  }
-  @media (max-width: ${({ theme }) => theme.Minitab}) {
-    width: 95%;
-    margin-right: 2rem;
-  } */
+
   @media (max-width: 700px) {
     width: 100%;
     padding: 0;
     margin-right: 0;
     padding-bottom: 4rem;
     margin-top: 6.2rem;
+  }
+`;
+
+const StyledHFormWrapper = styled.div`
+  @media (max-width: 700px) {
+    display: none;
   }
 `;
 
@@ -45,4 +45,9 @@ const PostItemWrapper = styled.div`
   }
 `;
 
-export { StyledPostWrapper, StyledPostItemContainer, PostItemWrapper };
+export {
+  StyledPostWrapper,
+  StyledPostItemContainer,
+  PostItemWrapper,
+  StyledHFormWrapper,
+};

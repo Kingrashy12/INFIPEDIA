@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import PostItem from "./PostItem";
 import {
   PostItemWrapper,
+  StyledHFormWrapper,
   StyledPostWrapper,
 } from "../../styles/components/Post.styled";
 import { Loader } from "../../libs";
@@ -16,7 +17,9 @@ const PostFeed = () => {
 
   return (
     <StyledPostWrapper className="h-auto gap-5 p-1 mt-32 flex flex-col relative">
-      <HPostForm />
+      <StyledHFormWrapper>
+        <HPostForm />
+      </StyledHFormWrapper>
 
       <PostItemWrapper className="relative items-center justify-center">
         {isLoading ? (

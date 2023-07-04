@@ -40,3 +40,4 @@ export { default as PostViewFeed } from "./posts/PostViewFeed";
 export { default as ProfileRightContainer } from "./layout/ProfileRightContainer";
 export { default as ProfileContainer } from "./layout/ProfileContainer";
 export { default as EditEmailModal } from "./models/EditEmailModal";
+export { default as ShareModal } from "./models/ShareModal";

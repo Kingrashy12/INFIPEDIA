@@ -12,8 +12,8 @@ const Home = () => {
   });
   const currentUserId = useSelector((state) => state.credentails?._id);
   useEffect(() => {
-    dispatch(getTrends());
-    dispatch(getAllPosts());
+    // dispatch(getTrends());
+    // dispatch(getAllPosts());
     dispatch(FetchFollowingPost(currentUserId));
   }, [dispatch]);
 

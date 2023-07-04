@@ -22,6 +22,16 @@ const StyledSearch = styled.div`
   }
 `;
 
+const StyledSearchConatiner = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
+`;
+
 const StyledSearchImg = styled.img`
   width: 3.5rem;
   height: 3.5rem;
@@ -60,4 +70,10 @@ const ResultContainer = styled.div`
   }
 `;
 
-export { StyledSearch, StyledSearchImg, SearchResultP, ResultContainer };
+export {
+  StyledSearch,
+  StyledSearchImg,
+  SearchResultP,
+  ResultContainer,
+  StyledSearchConatiner,
+};

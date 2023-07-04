@@ -12,6 +12,7 @@ const MangeActions = ({ selected, posts, setSelected }) => {
   function del() {
     dispatch(deletePost(postId));
   }
+  console.log("selected:", selected);
   return (
     <FlexBetween className="relative p-[6px] actionFlex">
       <div className="flex gap-3">

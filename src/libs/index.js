@@ -34,3 +34,4 @@ export { default as VideoControl } from "./components/Video";
 export { default as CustomVideo } from "./components/CustomeVideo";
 export { default as DateFormatter } from "./DateFormatter";
 export { default as BackDrop } from "./components/BackDrop";
+export { default as IconBadge } from "./components/IconBadge";
