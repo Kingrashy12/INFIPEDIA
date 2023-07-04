@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ProfileCard, SideNavII } from "../../components";
+import {
+  ProfileContainer,
+  ProfileRightContainer,
+  SideNavII,
+} from "../../components";
 import { StyledProfile } from "../../styles/pages/profile";
 import axios from "axios";
 import { BASE_URL } from "../../hooks/api";
@@ -32,7 +36,8 @@ const Profile = () => {
   return (
     <StyledProfile>
       <SideNavII />
-      <ProfileCard isLoading={isLoading} user={user} error={error} />
+      <ProfileContainer isLoading={isLoading} user={user} error={error} />
+      <ProfileRightContainer />
     </StyledProfile>
   );
 };

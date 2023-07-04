@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
 import { FaFileImage } from "react-icons/fa";
 
-const CoverProfileUploadJs = ({ data, setData }) => {
+const CoverProfileUploadJs = ({ user, userData }) => {
   const imgRef = useRef();
   const [photo, setPhoto] = useState(null);
   function handleImageUpload(e) {
     const file = e.target.files[0];
-    console.log("user-cover:", data);
+    console.log("user-cover", user);
+    console.log("photo:", photo);
     TransFormFile(file);
   }
   function TransFormFile(file) {
@@ -15,7 +16,7 @@ const CoverProfileUploadJs = ({ data, setData }) => {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setPhoto(reader.result);
-        setData({ ...data, userCover: reader.result });
+        userData({ ...user, userCover: reader.result });
       };
     } else {
       setPhoto("");

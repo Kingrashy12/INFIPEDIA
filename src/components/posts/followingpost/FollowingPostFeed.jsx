@@ -14,10 +14,6 @@ const FollowingPostFeed = ({ currentUserId }) => {
   const error = data.followingPostErro;
   const empty = data?.followingPost.length === 0;
 
-  // useEffect(() => {
-  //   dispatch(FetchFollowingPost(currentUserId));
-  // }, [currentUserId]);
-
   return (
     <StyledFollowingFeed>
       {isLoading ? (

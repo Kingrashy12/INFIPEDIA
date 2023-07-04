@@ -11,6 +11,7 @@ const StyledTagPostWrapper = styled.div`
 
   @media screen and (max-width: 700px) {
     gap: 0;
+    margin-top: 6.2rem;
   }
 `;
 

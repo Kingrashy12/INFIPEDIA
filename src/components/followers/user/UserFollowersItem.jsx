@@ -47,7 +47,12 @@ const UserFollowersItem = ({ user, currentUser }) => {
       {userdata._id === auth?._id ? (
         <Libography fontSofia text={`You're following ${currentUser.name}`} />
       ) : (
-        <Button isCurrentBg text={isfollowing ? If : f} onClick={follow} />
+        <Button
+          isCurrentBg
+          text={isfollowing ? If : f}
+          onClick={follow}
+          className="fbtn"
+        />
       )}
     </StyledUserFollowersItem>
   );

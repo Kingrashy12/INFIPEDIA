@@ -47,7 +47,7 @@ const UserVideoContent = styled.div`
   background: #fff;
   position: relative;
   flex-direction: column;
-  width: 350px;
+  width: 90%;
   border-radius: 10px;
 
   @media screen and (max-width: 700px) {

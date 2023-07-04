@@ -158,7 +158,7 @@ const UserPostItemContent = ({ post, isLoading }) => {
       {post?.postImg && (
         <Image
           src={post.postImg.url}
-          className="h-80 max-[700px]:h-10 relative"
+          className="h-80 w-full max-[700px]:h-10 relative"
           alt="Post Image"
           isLoading={isLoading}
           variant="retangular"

@@ -5,8 +5,8 @@ const StyledUserWrapper = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
-  padding: 3px;
-  margin-top: 3rem;
+  /* padding: 3px; */
+  margin-top: 5rem;
   height: auto;
 
   @media screen and (max-width: 1024px) {
@@ -97,7 +97,7 @@ const StyledBioHeader = styled.div`
 `;
 
 const StyledHero = styled.div`
-  padding: 2rem;
+  /* padding: 2rem; */
 
   @media (max-width: 700px) {
     padding: 5px;
@@ -116,7 +116,7 @@ const FilterContainer = styled.div`
   position: relative;
   width: 100%;
   justify-content: center;
-  padding: 3rem;
+  /* padding: 3rem; */
   height: auto;
 
   @media screen and (max-width: 1024px) {

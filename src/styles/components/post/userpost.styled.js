@@ -24,7 +24,8 @@ const PostFilterContainer = styled.div`
   flex-direction: column;
   background: #fff;
   /* padding: 10px; */
-  border-radius: 8px;
+  border-radius: 5px;
+  width: 100%;
 
   @media screen and (max-width: 700px) {
     border-radius: 0;
@@ -36,9 +37,9 @@ const FilterDivider = styled.div`
 `;
 
 const UserPostItemContainer = styled.div`
-  width: 500px;
+  width: 100%;
   background: #fff;
-  border-radius: 9px;
+  border-radius: 5px;
 
   @media screen and (max-width: 700px) {
     width: 100%;

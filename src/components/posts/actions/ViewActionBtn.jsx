@@ -17,7 +17,7 @@ const ViewActionBtn = ({ post, isLoading, liked, likes, comments }) => {
   const dispatch = useDispatch();
   const [data] = useState({
     auth: user?._id,
-    post: post?._id,
+    post: post._id,
   });
 
   function savepost() {

@@ -10,6 +10,7 @@ const StyledFollowingFeed = styled.div`
 
   @media screen and (max-width: 700px) {
     gap: 1px;
+    margin-top: 6.2rem;
   }
 `;
 

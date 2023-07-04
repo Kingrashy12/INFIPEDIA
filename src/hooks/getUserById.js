@@ -1,6 +1,5 @@
 import axios from "axios";
 import { BASE_URL } from "./api";
-import { async } from "react-input-emoji";
 
 export async function getUserById(userId) {
   const response = await axios.get(`${BASE_URL}/users/${userId}/get`);
@@ -113,6 +112,14 @@ export async function LikeVideo(userId, videoId) {
   const response = await axios.patch(`${BASE_URL}/videos/like`, {
     userId: userId,
     videoId: videoId,
+  });
+  return response?.data;
+}
+
+export async function LikePosts(data) {
+  const response = await axios.patch(`${BASE_URL}/posts/like`, {
+    userId: data.auth,
+    postId: data.post,
   });
   return response?.data;
 }

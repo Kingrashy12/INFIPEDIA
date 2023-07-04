@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 const StyledProfile = styled.div`
   width: 100%;
-  height: auto;
+  position: relative;
   display: flex;
-  gap: 3rem;
-  overflow-y: auto;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0;
   overflow-x: hidden;
 
   @media (max-width: ${({ theme }) => theme.tab}) {

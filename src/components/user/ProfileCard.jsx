@@ -14,52 +14,23 @@ import UserHero from "./UserHero";
 import { FetchUserTagPosts, getUserPost } from "../../store/PostSlice";
 import { getUserVideos } from "../../store/VideosSlice";
 import UserPostFeed from "../posts/UserPostFeed";
-import {
-  getUserById,
-  getUserFollowers,
-  getUserFollowing,
-} from "../../hooks/getUserById";
 import UserFollowers from "../followers/user/UserFollowers";
 import UserFollowing from "../followers/user/UserFollowing";
 import UserVideoFeed from "../video/UserVideoFeed";
 
-const ProfileCard = ({ user, isLoading, error }) => {
+const ProfileCard = ({
+  user,
+  isLoading,
+  error,
+  followersData,
+  followingData,
+  userId,
+}) => {
   const [post, setPost] = useState(true);
   const [video, setVideo] = useState(false);
   const [followin, setFollowin] = useState(false);
   const [follower, setFollower] = useState(false);
 
-  const [followingData, setFollowingData] = useState([]);
-  const [followersData, setFollowersData] = useState([]);
-
-  const userId = user._id;
-
-  useEffect(() => {
-    const getFollowersdata = async () => {
-      const data = await getUserFollowers(userId);
-      setFollowersData(data);
-    };
-    getFollowersdata();
-  }, [userId]);
-
-  useEffect(() => {
-    const getFollowingdata = async () => {
-      const data = await getUserFollowing(userId);
-      setFollowingData(data);
-    };
-    getFollowingdata();
-  }, [userId]);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    document.title = `${user?.name} - Infipedia`;
-  });
-
-  useEffect(() => {
-    dispatch(getUserPost(user.username));
-    dispatch(getUserVideos(user.username));
-    dispatch(FetchUserTagPosts(user._id));
-  });
   return (
     <StyledUserWrapper>
       {error ? (

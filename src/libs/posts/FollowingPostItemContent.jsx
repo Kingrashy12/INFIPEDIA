@@ -1,7 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FlexBetween } from "../../styles/common/Global";
-import { Image, Libography, PostImage, Span, TruncatedText } from "..";
+import {
+  DateFormatter,
+  Image,
+  Libography,
+  PostImage,
+  Span,
+  TruncatedText,
+} from "..";
 import { CgComment } from "react-icons/cg";
 import {
   MdBookmarks,
@@ -20,9 +27,8 @@ import { likePost, savePost, unSavePost } from "../../store/PostSlice";
 import { useNavigate } from "react-router-dom";
 import { StyledPostItemContainer } from "../../styles/components/Post.styled";
 
-const FollowingPostItemContent = ({ post }) => {
+const FollowingPostItemContent = ({ post, liked, likes, commentsdata }) => {
   const auth = useSelector((state) => state.credentails);
-  const [liked, setLiked] = useState(false);
   const [tag, setTag] = useState(false);
   const [open, setOpen] = useState(false);
   const [openShare, setOpenShare] = useState(false);
@@ -65,21 +71,6 @@ const FollowingPostItemContent = ({ post }) => {
     }
   }
 
-  useEffect(() => {
-    if (post.likes.includes(auth?._id)) {
-      setLiked(true);
-    } else {
-      setLiked(false);
-    }
-  }, [post]);
-  const createdAt = useMemo(() => {
-    if (!post?.createdAt) {
-      return null;
-    }
-
-    return formatDistanceToNowStrict(new Date(post.createdAt));
-  }, [post?.createdAt]);
-
   const [max, setMax] = useState(70);
   const [less, setLess] = useState(false);
 
@@ -99,6 +90,19 @@ const FollowingPostItemContent = ({ post }) => {
     <Libography text="See less" onClick={hide} className="font-semibold" />
   );
 
+  const l = (
+    <div className="flex items-center gap-1 text-red-500">
+      <Libography text={likes.length} />
+      <Libography text="likes" />
+    </div>
+  );
+  const c = (
+    <div className="flex items-center gap-1 text-blue-500">
+      <Libography text={commentsdata.length} />
+      <Libography text="comments" />
+    </div>
+  );
+
   return (
     <StyledPostItemContainer className="shadow shadow-black">
       <div className="flex flex-col p-3">
@@ -115,14 +119,7 @@ const FollowingPostItemContent = ({ post }) => {
                 text={post.name}
                 onClick={() => navigate(`/${post.username}`)}
               />
-              <Libography
-                fontSemiBold
-                fontSofia
-                loadingWidth="100px"
-                loadingHeight="25px"
-                className="text-neutral-500 text-xs flex -translate-y-1"
-                text={createdAt}
-              />
+              <DateFormatter item={post} />
             </div>
             {post?.verified && (
               <MdVerified color="#f95f35" className="translate-y-[6px]" />
@@ -159,13 +156,17 @@ const FollowingPostItemContent = ({ post }) => {
         />
       )}
       <div className="p-5">
+        <FlexBetween>
+          <Libography fontSofia text={l} className="text-sm" />
+          <Libography fontSofia text={c} className="text-sm" />
+        </FlexBetween>
         <hr />
         <FlexBetween className="mt-2">
           <div className="flex gap-1">
             {liked ? (
               <AiFillHeart
                 size={25}
-                className="cursor-pointer text-red-500"
+                className="cursor-pointer text-red-500 hover:bg-red-300 p-1 rounded-full"
                 onClick={() => {
                   onLike();
                 }}
@@ -173,20 +174,18 @@ const FollowingPostItemContent = ({ post }) => {
             ) : (
               <AiOutlineHeart
                 size={25}
-                className="cursor-pointer text-red-500"
+                className="cursor-pointer text-red-500 hover:bg-red-300 p-1 rounded-full"
                 onClick={() => {
                   onLike();
                 }}
               />
             )}
-            <span className="text-red-500">{post.likes?.length}</span>
           </div>
           <div
             className="flex gap-1 items-center cursor-pointer"
             onClick={comments}
           >
             <CgComment size={23} className="text-blue-500" />
-            <span className="text-blue-500">{post.comments?.length}</span>
           </div>
           <div
             className="flex gap-1 items-center cursor-pointer"

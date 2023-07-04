@@ -37,3 +37,5 @@ export { default as HomeContent } from "./home/HomeContent";
 export { default as FollowingPostFeed } from "./posts/followingpost/FollowingPostFeed";
 export { default as ComingSoon } from "./chats/ComingSoon";
 export { default as PostViewFeed } from "./posts/PostViewFeed";
+export { default as ProfileRightContainer } from "./layout/ProfileRightContainer";
+export { default as ProfileContainer } from "./layout/ProfileContainer";

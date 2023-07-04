@@ -10,7 +10,7 @@ const UserTaggedPost = () => {
   return (
     <StyledUserPostFeedContainer>
       <div
-        className={`mt-[10px] z-0 flex-col flex gap-3 justify-center items-center`}
+        className={`mt-[10px] z-0 flex-col flex gap-3 justify-center /items-center`}
       >
         {empty ? (
           <Empty

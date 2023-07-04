@@ -37,7 +37,7 @@ const ProfileCoverModel = ({ setOpenCover }) => {
         />
       </FlexBetween>
       <div className="flex items-center justify-center flex-col">
-        <CoverProfileUploadJs data={user} setData={setUser} />
+        <CoverProfileUploadJs user={user} userData={setUser} />
       </div>
       <Button
         isCurrentBg

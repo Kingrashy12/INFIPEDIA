@@ -15,11 +15,12 @@ export default UserTagItem;
 const StyledUserTag = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 60%;
+  position: relative;
+  /* align-items: center;
+  justify-content: center; */
+  width: 100%;
 
-  @media screen and (max-width: 1024px) {
+  /* @media screen and (max-width: 1024px) {
     width: 70%;
   }
   @media screen and (max-width: 800px) {
@@ -28,5 +29,5 @@ const StyledUserTag = styled.div`
   @media screen and (max-width: 700px) {
     width: 100%;
     gap: 0;
-  }
+  } */
 `;

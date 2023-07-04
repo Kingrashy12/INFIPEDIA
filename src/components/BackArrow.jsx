@@ -9,7 +9,7 @@ const BackArrow = () => {
       className="flex gap-1 items-center cursor-pointer"
       onClick={() => navigate(-1)}
     >
-      <HiArrowNarrowLeft size={25} />
+      <HiArrowNarrowLeft size={25} className="svg max-[700px]:text-[5px]" />
     </div>
   );
 };

@@ -14,6 +14,7 @@ const StyledPostWrapper = styled.div`
     padding: 0;
     margin-right: 0;
     padding-bottom: 4rem;
+    margin-top: 6.2rem;
   }
 `;
 

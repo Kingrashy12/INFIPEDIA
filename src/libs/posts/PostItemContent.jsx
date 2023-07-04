@@ -121,14 +121,12 @@ const PostItemContent = ({ post, likes, commentsdata, liked }) => {
 
   const l = (
     <div className="flex items-center gap-1 text-red-500">
-      {/* <AiFillHeart className="text-red-600" size={20} /> */}
       <Libography text={likes.length} />
       <Libography text="likes" />
     </div>
   );
   const c = (
     <div className="flex items-center gap-1 text-blue-500">
-      {/* <AiFillHeart className="text-red-600" size={20} /> */}
       <Libography text={commentsdata.length} />
       <Libography text="comments" />
     </div>

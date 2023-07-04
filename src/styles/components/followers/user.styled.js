@@ -13,6 +13,7 @@ const StyledUserFollowers = styled.div`
       font-size: 12px;
       width: 50px;
       height: 35px;
+      display: none;
     }
   }
 `;
@@ -27,6 +28,9 @@ const StyledUserFollowersItem = styled.div`
   @media screen and (max-width: 700px) {
     p {
       font-size: 15px;
+    }
+    button {
+      display: none;
     }
   }
 `;
