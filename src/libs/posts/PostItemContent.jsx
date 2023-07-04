@@ -190,7 +190,7 @@ const PostItemContent = ({ post, likes, commentsdata, liked }) => {
           maxLength={max}
           underText={less ? h : s}
           fontPoppins
-          onClick={() => navigate(`/${post?.username}/status/${post?._id}`)}
+          onClick={() => navigate(`/${post?.username}/status/${post._id}`)}
         />
       </div>
       {post?.postImg && (

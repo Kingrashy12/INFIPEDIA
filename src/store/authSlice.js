@@ -32,6 +32,8 @@ const initialState = {
   coverEditError: null,
   deleteStatus: null,
   deleteError: null,
+  emailupdatedStatus: null,
+  emailupdatedError: null,
 };
 
 export const registerUser = createAsyncThunk(
@@ -138,6 +140,23 @@ export const deleteUserAccount = createAsyncThunk(
       toast.error(error.message, { position: "top-center" });
       console.log({ error: error.message });
       return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const UpdateEmail = createAsyncThunk(
+  "auth-update/email",
+  async (data, userId) => {
+    try {
+      const response = await axios.patch(`${BASE_URL}/users/${userId}/edit`, {
+        email: data.email,
+        userId: data.userId,
+      });
+      return response?.data;
+    } catch (error) {
+      toast.error(error, { position: "top-center" });
+      console.log({ error: error.message });
+      // return rejectWithValue(error.response.data);
     }
   }
 );
@@ -320,6 +339,25 @@ const authSlice = createSlice({
         ...state,
         deleteStatus: "rejected",
         deleteError: action.payload,
+      };
+    });
+    builder.addCase(UpdateEmail.pending, (state, action) => {
+      return { ...state, emailupdatedStatus: "pending" };
+    });
+    builder.addCase(UpdateEmail.fulfilled, (state, action) => {
+      toast.success("Email updated", { position: "top-center" });
+      // state.email = action.meta.arg.email;
+      return {
+        ...state,
+        emailupdatedStatus: "success",
+        email: action.meta.arg.email,
+      };
+    });
+    builder.addCase(UpdateEmail.rejected, (state, action) => {
+      return {
+        ...state,
+        emailupdatedStatus: "rejected",
+        emailupdatedError: action.payload,
       };
     });
   },

@@ -8,6 +8,8 @@ import UImge from "../user/UImge";
 import { FetchVideoLikes, FetchVideoViews } from "../../helper/fetch";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { StyledPlayContainer } from "../../styles/components/video/videoitem.styled";
+import VideoComment from "../comments/VideoComment";
+import PlayButtonContainer from "./PlayButtonContainer";
 
 const PlayContainer = () => {
   const [vlikes, setVlikes] = useState([]);
@@ -86,6 +88,12 @@ const PlayContainer = () => {
         views={vviews}
         comments={vcomments}
         like={like}
+      />
+      <PlayButtonContainer
+        likes={vlikes}
+        comments={vcomments}
+        video={play}
+        isLoading={isLoading}
       />
     </StyledPlayContainer>
   );

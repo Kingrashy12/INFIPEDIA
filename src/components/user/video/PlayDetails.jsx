@@ -10,6 +10,8 @@ import { FaCommentAlt, FaEye } from "react-icons/fa";
 import { FlexBetween } from "../../../styles/common/Global";
 import { CgSoftwareDownload } from "react-icons/cg";
 import { LikeVideo } from "../../../hooks/getUserById";
+import { useDispatch } from "react-redux";
+import { FollowUser } from "../../../store/UsersSlice";
 
 const PlayDetails = ({
   play,
@@ -26,9 +28,14 @@ const PlayDetails = ({
 }) => {
   const userId = auth?._id;
   const videoId = play._id;
+  const followId = play.userId;
+  const dispatch = useDispatch();
 
   async function likePlay() {
     await LikeVideo(userId, videoId);
+  }
+  function follow() {
+    dispatch(FollowUser(followId, userId));
   }
   return (
     <PlayDeatilsContainer>
@@ -55,13 +62,7 @@ const PlayDetails = ({
           />
         </PlayVideoDetails>
         {auth?._id === play.userId ? (
-          <Button
-            isCurrentBg
-            text="Edit Profile"
-            componentsLoading={isLoading}
-            loadingHeight={`45px`}
-            loadingWidth={`55px`}
-          />
+          ""
         ) : (
           <Button
             // secondary
@@ -70,6 +71,7 @@ const PlayDetails = ({
             componentsLoading={isLoading}
             loadingHeight={`45px`}
             loadingWidth={`55px`}
+            onClick={follow}
           />
         )}
       </PlayHeaderDetails>

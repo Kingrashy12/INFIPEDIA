@@ -1,9 +1,15 @@
 import { create } from "zustand";
 
-const useCommentsModal = create((set) => ({
+const useEditEmailModal = create((set) => ({
   isOpen: false,
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false }),
+  onOpen: () => {
+    console.log("Email Modal Opened");
+    set({ isOpen: true });
+  },
+  onClose: () => {
+    console.log("Email Modal Closed");
+    set({ isOpen: false });
+  },
 }));
 
-export default useCommentsModal;
+export default useEditEmailModal;

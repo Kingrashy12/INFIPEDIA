@@ -25,7 +25,13 @@ import {
   Videos,
   YourInfo,
 } from "./pages";
-import { BottomNav, InternetStatus, Navbar, ScrollTop } from "./components";
+import {
+  BottomNav,
+  EditEmailModal,
+  InternetStatus,
+  Navbar,
+  ScrollTop,
+} from "./components";
 import { ThemeProvider } from "styled-components";
 import { BlurBg, GlobalStyles } from "./styles/Global";
 import { useSelector } from "react-redux";
@@ -52,6 +58,7 @@ function App() {
         <BlurBg style={{ top: "-1%", right: "5rem" }} />
         <BlurBg style={{ top: "36%", left: "2rem" }} />
         <ToastContainer />
+        {/* <EditEmailModal /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth/login" element={<Login />} />

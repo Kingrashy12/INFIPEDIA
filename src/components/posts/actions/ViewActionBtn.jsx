@@ -11,7 +11,7 @@ import { Skeleton } from "@mui/material";
 const ViewActionBtn = ({ post, isLoading, liked, likes, comments }) => {
   const user = useSelector((state) => state.credentails);
   const check = useSelector((state) => state.posts.savedPosts);
-  const ava = check.find((item) => item._id === post?._id);
+  const ava = check?.find((item) => item?._id === post?._id);
   const [openShare, setOpenShare] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();

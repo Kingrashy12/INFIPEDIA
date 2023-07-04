@@ -137,3 +137,11 @@ export async function FetchVideoComments(vId) {
   const response = await axios.get(`${BASE_URL}/videos/comments/all/${vId}`);
   return response?.data;
 }
+
+export async function Updatedemail(data, userId) {
+  const response = await axios.patch(`${BASE_URL}/users/${userId}/edit`, {
+    email: data.email,
+    userId: data.userId,
+  });
+  return response?.data;
+}
