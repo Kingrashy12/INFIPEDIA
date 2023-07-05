@@ -25,7 +25,7 @@ const UserHero = ({ user, isLoading }) => {
         <div className="relative">
           <HeroCoverCamera
             className="bg-neutral-300 hover:bg-neutral-400 border border-black"
-            onClick={() => setOpenCover(true)}
+            // onClick={() => {setOpenCover(true)}}
           >
             <FcCamera size={25} />
             <Libography fontSofia text="Edit cover photo" />
