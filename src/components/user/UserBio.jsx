@@ -50,7 +50,7 @@ const UserBio = ({
     return format(new Date(user.createdAt), "MMMM yyyy");
   }, [user?.createdAt]);
 
-  const isfollowing = user?.followers?.includes(profileId);
+  const isfollowing = user.followers?.includes(profileId);
 
   async function follow() {
     if (!auth?._id) {

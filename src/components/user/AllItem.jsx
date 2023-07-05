@@ -9,22 +9,27 @@ import { ItemContainer } from "../../styles/components/user/all.styled";
 
 const AllItem = ({ user, isLoading }) => {
   const navigate = useNavigate();
-  const profileId = useSelector((state) => state.credentails);
-  const isfollowing = user?.followers?.includes(profileId._id);
+  const auth = useSelector((state) => state.credentails);
+  const profileId = auth?._id;
+  const isfollowing = user.followers?.includes(profileId);
   const dispatch = useDispatch();
   const [Follow, setFollow] = useState(false);
   const followId = user._id;
   // const uId = profileId;
 
   async function follow() {
-    setFollow(true);
-    try {
-      await followUser(followId, profileId);
-    } catch (error) {
-      console.log({ error: error.message });
-      toast.error(error.message, { position: "top-center" });
-    } finally {
-      setFollow(false);
+    if (!auth?._id) {
+      navigate("/auth/login");
+    } else {
+      setFollow(true);
+      try {
+        await followUser(followId, profileId);
+      } catch (error) {
+        console.log({ error: error.message });
+        toast.error(error.message, { position: "top-center" });
+      } finally {
+        setFollow(false);
+      }
     }
   }
 
