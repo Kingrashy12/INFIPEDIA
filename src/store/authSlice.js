@@ -18,7 +18,7 @@ const initialState = {
   userProfile: localStorage.getItem("userProfile")
     ? JSON.parse(localStorage.getItem("userProfile"))
     : "",
-  gender: "",
+
   registerStatus: "",
   registerError: "",
   loginStatus: "",
@@ -45,7 +45,6 @@ export const registerUser = createAsyncThunk(
         email: user.email,
         username: user.username,
         password: user.password,
-        gender: user.gender,
       });
       localStorage.setItem("Token", token.data);
       console.log(token.data);
@@ -222,7 +221,6 @@ const authSlice = createSlice({
           _id: user._id,
           username: user.username,
 
-          gender: user.gender,
           registerStatus: "success",
         };
       } else return state;
@@ -249,7 +247,7 @@ const authSlice = createSlice({
           _id: user._id,
           username: user.username,
           userProfile: user.userProfile,
-          gender: user.gender,
+
           loginStatus: "success",
         };
       } else return state;

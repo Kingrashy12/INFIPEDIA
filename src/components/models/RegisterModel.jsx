@@ -1,10 +1,12 @@
 import { Backdrop } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import { ImageUploadJs, Input, PasswordInput, Popup } from "../../libs";
+import { HeaderOne, Libography, Popup } from "../../libs";
 import { useDispatch, useSelector } from "react-redux";
 import { FaFileImage } from "react-icons/fa";
 import { registerUser } from "../../store/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button, FormControl, FormLabel, Input } from "@mui/joy";
+import { ClipLoader } from "react-spinners";
 
 const RegisterModel = () => {
   // const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +30,6 @@ const RegisterModel = () => {
     email: "",
     username: "",
     password: "",
-    gender: "",
   });
   console.log("user", user);
 
@@ -48,79 +49,77 @@ const RegisterModel = () => {
   }
 
   const body = (
-    <div className="flex flex-col relative gap-4 w-full p-2 items-center">
-      <input
-        type="text"
-        className="p-3 rounded-lg focus:border-sky-500 font-semibold focus:border-2 outline-none w-full"
-        placeholder="Name"
-        value={user.name}
-        onChange={(e) => setUser({ ...user, name: e.target.value })}
+    <div className="flex flex-col relative gap-4 w-full items-center p-2">
+      <HeaderOne fontSofia text="Register an account" className="text-[23px]" />
+      <FormControl required sx={{ width: "100%" }}>
+        <FormLabel>Name</FormLabel>
+        <Input
+          type="text"
+          name="name"
+          value={user.name}
+          className="w-full"
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+        />
+      </FormControl>
+      <FormControl required sx={{ width: "100%" }}>
+        <FormLabel>Username</FormLabel>
+        <Input
+          type="text"
+          name="username"
+          value={user.username}
+          className="w-full"
+          onChange={(e) => setUser({ ...user, username: e.target.value })}
+        />
+      </FormControl>
+      <FormControl required sx={{ width: "100%" }}>
+        <FormLabel>Email</FormLabel>
+        <Input
+          type="email"
+          name="email"
+          value={user.email}
+          className="w-full"
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+        />
+      </FormControl>
+      <FormControl required sx={{ width: "100%" }}>
+        <FormLabel>Password</FormLabel>
+        <Input
+          type="password"
+          name="password"
+          value={user.password}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
+        />
+      </FormControl>
+      <Libography
+        text=" Don't have an account? Login"
+        className="font-semibold font-sofia cursor-pointer text-blue-600 hover:underline"
+        onClick={() => navigate("/auth/login")}
       />
-      <input
-        type="text"
-        className="p-3 rounded-lg focus:border-sky-500 font-semibold focus:border-2 outline-none w-full"
-        placeholder="Username"
-        value={user.username}
-        onChange={(e) => setUser({ ...user, username: e.target.value })}
-      />
-      <Input
-        type="email"
-        value={user.email}
-        required={user.email}
-        className="w-full"
-        onChange={(e) => setUser({ ...user, email: e.target.value })}
-        placeholder="Email"
-      />
-      <PasswordInput
-        required={user.password}
-        value={user.password}
-        placeholder="Passowrd"
-        className="w-full"
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
-      />
-      <div
-        className={`p-2 ${
-          openG ? "" : "bg-white"
-        } w-full rounded-md outline-none cursor-pointer`}
-        onClick={() => setOpenG(!openG)}
-      >
-        {openG ? (
-          <div className="shadow shadow-black font-semibold font-sofia p-2 bg-white rounded-md cursor-pointer">
-            <p onClick={() => setUser({ ...user, gender: "male" })}>Male</p>
-            <hr />
-            <p onClick={() => setUser({ ...user, gender: "female" })}>FeMale</p>
-          </div>
-        ) : (
-          <option value="">
-            {user.gender ? user.gender.toUpperCase() : "Gender"}
-          </option>
-        )}
-      </div>
-    </div>
-  );
 
-  const footer = (
-    <p className="flex items-center gap-1 justify-center text-sky-300 font-sofia font-semibold cursor-pointer">
-      Have an account?
-      <span className="font-sofia font-semibold text-red-500 hover:underline">
-        Login
-      </span>
-    </p>
+      <Button
+        onClick={handleSubmit}
+        disabled={!user.email || !user.password}
+        className="bg-blue-600 disabled:cursor-not-allowed w-full"
+      >
+        {auth.loginStatus === "pending" ? <ClipLoader size={23} /> : "Register"}
+      </Button>
+    </div>
   );
 
   return (
     <Backdrop open={open}>
       <Popup
-        header="Register"
+        isWhite
+        // header="Register"
         open={open}
         body={body}
-        actionLabel="Register"
+        // actionLabel="Register"
         onClose={close}
         onFormSubmit={handleSubmit}
         isLoading={isLoading}
         disabled={isLoading || !user.email || user.password.length < 4}
-        footer={footer}
         onClick={handleNext}
+        hideBtn
       />
     </Backdrop>
   );

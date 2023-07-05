@@ -18,22 +18,22 @@ const MangePostItem = ({ post, selected, setSelected }) => {
 
   // console.log("you picked:", selected);
 
-  // useEffect(() => {
-  //   if (click) {
-  //     setIcon(IoCheckbox);
-  //     // setSelected(post._id);
-  //   } else {
-  //     setIcon(MdOutlineCheckBoxOutlineBlank);
-  //     // setSelected("");
-  //   }
-  // }, [click, post]);
-  function selectPost(post) {
+  useEffect(() => {
     if (click) {
       setIcon(IoCheckbox);
-      setSelected(post._id);
-    } else if (!click) {
-      setSelected("");
+      // setSelected(post._id);
+    } else {
       setIcon(MdOutlineCheckBoxOutlineBlank);
+      // setSelected("");
+    }
+  }, [click, post]);
+  function selectPost(post) {
+    if (click) {
+      // setIcon(IoCheckbox);
+      setSelected(post._id);
+    } else {
+      setSelected("");
+      // setIcon(MdOutlineCheckBoxOutlineBlank);s
     }
   }
 

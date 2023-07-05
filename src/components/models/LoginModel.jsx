@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { Loader, PasswordInput, Popup } from "../../libs";
+import {
+  HeaderOne,
+  Libography,
+  Loader,
+  PasswordInput,
+  Popup,
+} from "../../libs";
 import { Backdrop, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button, FormControl, FormLabel, Input } from "@mui/joy";
+import { ClipLoader } from "react-spinners";
 
 const LoginModel = () => {
   const path = useLocation();
@@ -34,48 +42,61 @@ const LoginModel = () => {
   const open = path.pathname === "/auth/login";
   const body = (
     <div className="flex flex-col relative gap-4 w-full p-2">
-      <>
-        <TextField
-          label="Email"
-          variant="outlined"
-          value={user.email}
-          error={!user.email || !user.email.includes("@")}
+      <HeaderOne
+        fontSofia
+        text="Login to your account"
+        className="text-[23px]"
+      />
+      <FormControl required sx={{ width: "100%" }}>
+        <FormLabel>Email</FormLabel>
+        <Input
+          type="email"
+          name="email"
+          value={user.name}
+          className="w-full"
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
-
-        <TextField
-          label="Password"
-          variant="outlined"
+      </FormControl>
+      <FormControl required sx={{ width: "100%" }}>
+        <FormLabel>Password</FormLabel>
+        <Input
+          type="password"
+          name="password"
           value={user.password}
-          error={!user.password || user.password.length < 4}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
-      </>
+      </FormControl>
+      <Libography
+        text="New to infipedia? Register"
+        className="font-semibold font-sofia cursor-pointer text-blue-600 hover:underline"
+        onClick={() => navigate("/auth/signup")}
+      />
+
+      <Button
+        onClick={handleLogin}
+        disabled={!user.email || !user.password}
+        className="bg-blue-600 disabled:cursor-not-allowed w-full"
+      >
+        {isLoading ? <ClipLoader size={23} /> : "Login"}
+      </Button>
     </div>
   );
 
-  const footer = (
-    <p className="flex items-center gap-1 justify-center text-black font-sofia font-semibold cursor-pointer">
-      New to Infipedia?
-      <span className="font-sofia font-semibold text-red-500 hover:underline">
-        Register
-      </span>
-    </p>
-  );
   return (
     <Backdrop open={open}>
       <Popup
         isWhite
-        header="Login"
+        // header="Login"
         open={open}
         body={body}
-        actionLabel="Login"
+        // actionLabel="Login"
         onClose={close}
         onFormSubmit={handleLogin}
         isLoading={isLoading}
         disabled={isLoading || !user.email || user.password.length < 4}
-        footer={footer}
+        // footer={footer}
         onClick={handleNext}
+        hideBtn
       />
     </Backdrop>
   );

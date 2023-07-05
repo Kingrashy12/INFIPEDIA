@@ -15,6 +15,7 @@ const Popup = ({
   isLoading,
   disabled,
   isWhite,
+  hideBtn,
 }) => {
   function handleClose() {
     if (isLoading) return null;
@@ -39,7 +40,7 @@ const Popup = ({
           />
         </div>
         <div className="flex flex-col justify-center items-center">{body}</div>
-        <div className="flex flex-col gap-3 p-3">
+        <div className={`flex flex-col gap-3 p-3 ${hideBtn ? "hidden" : ""}`}>
           <Button
             secondary={isWhite}
             isCurrentBg={!isWhite}
