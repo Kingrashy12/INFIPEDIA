@@ -9,7 +9,7 @@ import VCommentItem from "./VCommentItem";
 const VideoComment = ({ comments, video, isLoading }) => {
   return (
     <StyledComments>
-      <VideoCommentsForm video={video} />
+      <VideoCommentsForm video={video} Loading={isLoading} />
       <StyledVCommentWrapper>
         {comments.map((comment, index) => (
           <VCommentItem comment={comment} key={index} isLoading={isLoading} />

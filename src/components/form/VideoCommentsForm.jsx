@@ -11,8 +11,9 @@ import { Button } from "../../libs";
 import { IoClose } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { CommentsOnVideo } from "../../hooks/getUserById";
+import { Skeleton } from "@mui/material";
 
-const VideoCommentsForm = ({ video }) => {
+const VideoCommentsForm = ({ video, Loading }) => {
   const user = useSelector((state) => state.credentails);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,22 +41,30 @@ const VideoCommentsForm = ({ video }) => {
   return (
     <StyledViewdCommentsForm className="shadow shadow-slate-400">
       <ViewedPostCommetsFlexBox>
-        <ViwedCommentsFormImg
-          src={user?.userProfile?.url || PlaceholderImage}
-          alt="User-Profile"
-        />
-        <Textarea
-          sx={{
-            width: "100%",
-            fontFamily: "'Sofia Sans Semi Condensed', sans-serif",
-            color: "#000",
-            "::placeholder": { color: "#000" },
-          }}
-          autoComplete="Yes"
-          placeholder={`What your comments, ${user?.username}?`}
-          value={data.text}
-          onChange={(e) => setData({ ...data, text: e.target.value })}
-        />
+        {Loading ? (
+          <Skeleton variant="circular" width="55px" height="50px" />
+        ) : (
+          <ViwedCommentsFormImg
+            src={user?.userProfile?.url || PlaceholderImage}
+            alt="User-Profile"
+          />
+        )}
+        {Loading ? (
+          <Skeleton variant="text" width="100%" height="50px" />
+        ) : (
+          <Textarea
+            sx={{
+              width: "100%",
+              fontFamily: "'Sofia Sans Semi Condensed', sans-serif",
+              color: "#000",
+              "::placeholder": { color: "#000" },
+            }}
+            autoComplete="Yes"
+            placeholder={`What your comments, ${user?.username}?`}
+            value={data.text}
+            onChange={(e) => setData({ ...data, text: e.target.value })}
+          />
+        )}
       </ViewedPostCommetsFlexBox>
       <hr />
       <div className="flex justify-between p-[0.6rem]">
@@ -65,6 +74,9 @@ const VideoCommentsForm = ({ video }) => {
           disabled={isLoading || !data.text}
           isLoading={isLoading}
           onClick={shareComments}
+          componentsLoading={Loading}
+          loadingHeight={"40px"}
+          loadingWidth={"50px"}
         />
       </div>
     </StyledViewdCommentsForm>

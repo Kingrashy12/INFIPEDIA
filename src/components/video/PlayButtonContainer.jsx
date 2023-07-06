@@ -6,7 +6,7 @@ import VideoComment from "../comments/VideoComment";
 const PlayButtonContainer = ({ comments, video, likes, isLoading }) => {
   return (
     <StyledButtonPlay>
-      <LikesContainer />
+      <LikesContainer video={video} likes={likes} isLoading={isLoading} />
       <VideoComment comments={comments} video={video} isLoading={isLoading} />
     </StyledButtonPlay>
   );

@@ -18,17 +18,17 @@ const PlayVideo = ({ play, isLoading }) => {
         />
       )}
 
-      <FlexBetween className="p-2 max-[700px]:p-1 max-[700px]:flex-col w-full">
-        <HeaderOne
-          isLoading={isLoading}
-          loadingHeight={`50px`}
-          fontBold
-          fontSofia
-          text={play?.desc}
-          loadingWidth={`100%`}
-          className="text-xl max-[700px]:text-sm text-black mt-2"
-        />
-      </FlexBetween>
+      {/* <FlexBetween className="p-2 max-[700px]:p-1 max-[700px]:flex-col relative w-full"> */}
+      <HeaderOne
+        isLoading={isLoading}
+        loadingHeight={`50px`}
+        fontBold
+        fontSofia
+        text={play?.desc}
+        loadingWidth={`98%`}
+        className="text-xl max-[700px]:text-sm text-black mt-2"
+      />
+      {/* </FlexBetween> */}
     </VideoPlayWrapper>
   );
 };

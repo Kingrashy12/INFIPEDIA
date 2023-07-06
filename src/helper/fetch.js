@@ -35,3 +35,10 @@ export async function FetchPostComments(postId) {
   const response = await axios.get(`${BASE_URL}/posts/comments/all/${postId}`);
   return response?.data;
 }
+
+export async function FetchUsersWhoLiked(videoId) {
+  const response = await axios.get(
+    `${BASE_URL}/videos/like/user/liked/${videoId}`
+  );
+  return response?.data;
+}

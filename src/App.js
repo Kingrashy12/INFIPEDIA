@@ -21,6 +21,7 @@ import {
   Saved,
   SecurityAndAccess,
   Settings,
+  Trending,
   VideoPlayWrap,
   Videos,
   YourInfo,
@@ -75,6 +76,7 @@ function App() {
           <Route path="/store/:title" element={<ItemView />} />
           <Route path="/users" element={<Followers />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/trending" element={<Trending />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/:username/status/:postId" element={<PostView />} />
           <Route

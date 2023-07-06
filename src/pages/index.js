@@ -20,3 +20,4 @@ export { default as Password } from "./settings/Password";
 export { default as Settings } from "./settings/Settings";
 export { default as DeactiveAccount } from "./settings/DeactiveAccount";
 export { default as PostView } from "./posts/PostView";
+export { default as Trending } from "./trend/Trending";
