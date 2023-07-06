@@ -1,181 +1,129 @@
 import React, { useEffect, useRef, useState } from "react";
-import VideoControl from "./VideoControl";
-import ReactPlayer from "react-player";
-import "../styles/css/video.css";
+import { BiSolidVolumeFull, BiSolidVolumeMute } from "react-icons/bi";
+import { FaPause, FaPlay } from "react-icons/fa";
+import { IoMdRefresh } from "react-icons/io";
+import Libography from "../Texts/Libography";
+import { GoDotFill } from "react-icons/go";
 
-export const formatTime = (time) => {
-  //formarting duration of video
-  if (isNaN(time)) {
-    return "00:00";
+const CustomeVideo = ({ className, video }) => {
+  const vidRef = useRef();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [mute, setMute] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    const handleTimeUpdate = () => {
+      setCurrentTime(vidRef.current.currentTime);
+    };
+
+    vidRef.current.addEventListener("timeupdate", handleTimeUpdate);
+
+    return () => {
+      vidRef.current?.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, []);
+  function play() {
+    vidRef.current.play();
   }
-
-  const date = new Date(time * 1000);
-  const hours = date.getUTCHours();
-  const minutes = date.getUTCMinutes();
-  const seconds = date.getUTCSeconds().toString().padStart(2, "0");
-  if (hours) {
-    //if video have hours
-    return `${hours}:${minutes.toString().padStart(2, "0")} `;
-  } else return `${minutes}:${seconds}`;
-};
-
-const CustomeVideo = ({ src, height, className }) => {
-  const videoPlayerRef = useRef(null);
-  const controlRef = useRef(null);
-  let count = 0;
-  const [videoState, setVideoState] = useState({
-    playing: false,
-    muted: false,
-    volume: 0.5,
-    played: 0,
-    seeking: false,
-    Buffer: true,
-  });
-  const { playing, muted, volume, playbackRate, played, seeking, buffer } =
-    videoState;
-  const playPauseHandler = () => {
-    //plays and pause the video (toggling)
-    setVideoState({ ...videoState, playing: !videoState.playing });
-  };
-  function handleReplay() {
-    setVideoState({ ...videoState, playing: videoState.playing });
+  function pause() {
+    vidRef.current.pause();
   }
-  const rewindHandler = () => {
-    //Rewinds the video player reducing 5
-    videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() - 5);
-  };
-  const fastFowardHandler = () => {
-    //FastFowards the video player by adding 10
-    videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() + 10);
-  };
-  const progressHandler = (state) => {
-    if (count < 3) {
-      // toggling player control container
-
-      controlRef.current.style.visibility = "hidden";
-    } else if (controlRef.current.style.visibility === "visible") {
-      count += 10;
-    }
-    if (!seeking) {
-      setVideoState({ ...videoState, ...state });
-    }
-  };
-  const seekHandler = (e, value) => {
-    setVideoState({ ...videoState, played: parseFloat(value) / 100 });
+  const handleReplay = () => {
+    vidRef.current.currentTime = 0; // Reset video time to the beginning
+    vidRef.current.play(); // Start playing the video
   };
 
-  const seekMouseUpHandler = (e, value) => {
-    setVideoState({ ...videoState, seeking: false });
-    videoPlayerRef.current.seekTo(value / 100);
-  };
-  const volumeChangeHandler = (e, value) => {
-    const newVolume = parseFloat(value) / 100;
-    setVideoState({
-      ...videoState,
-      volume: newVolume,
-      muted: Number(newVolume) === 0 ? true : false, // volume === 0 then muted
-    });
-  };
-
-  const volumeSeekUpHandler = (e, value) => {
-    const newVolume = parseFloat(value) / 100;
-    setVideoState({
-      ...videoState,
-      volume: newVolume,
-      muted: newVolume === 0 ? true : false,
-    });
-  };
-
-  const muteHandler = () => {
-    //Mutes the video player
-    setVideoState({ ...videoState, muted: !videoState.muted });
-  };
-
-  const mouseMoveHandler = () => {
-    controlRef.current.style.visibility = "visible";
-    count = 0;
-  };
-
-  const currentTime = videoPlayerRef.current
-    ? videoPlayerRef.current.getCurrentTime()
-    : "00:00";
-
-  const duration = videoPlayerRef.current
-    ? videoPlayerRef.current.getDuration()
-    : "00:00";
-
-  const formatCurrentTime = formatTime(currentTime);
-
-  const formatDuration = formatTime(duration);
-  const [ended, setEnded] = useState(false);
   function handleEnd() {
-    setEnded(true);
+    setIsPlaying(false);
+    setIsFinished(true);
   }
+  useEffect(() => {
+    const handlePlaying = () => {
+      setIsPlaying(true);
+    };
 
-  function vidCtrl(e) {
-    const vid = document.querySelector("video");
-    const key = e.code;
+    const handlePause = () => {
+      setIsPlaying(false);
+    };
 
-    if (key === "ArrowLeft") {
-      vid.currentTime -= 5;
-      if (vid.currentTime < 0) {
-        vid.pause();
-        vid.currentTime = 0;
-      }
-    } else if (key === "ArrowRight") {
-      vid.currentTime += 5;
-      if (vid.currentTime > vid.duration) {
-        vid.pause();
-        vid.currentTime = 0;
-      }
-    } else if (key === "Space") {
-      e.preventDefault();
-      if (vid.paused || vid.ended) {
-        vid.play();
-      } else {
-        vid.pause();
-      }
-    }
-  }
+    const videoElement = vidRef.current;
 
-  function playClick() {
-    setVideoState({ ...videoState, playing: true });
-  }
+    videoElement.addEventListener("playing", handlePlaying);
+    videoElement.addEventListener("pause", handlePause);
+
+    return () => {
+      videoElement.removeEventListener("playing", handlePlaying);
+      videoElement.removeEventListener("pause", handlePause);
+    };
+  }, []);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
 
   return (
-    <div className="player__wrapper" onMouseDown={mouseMoveHandler}>
-      <ReactPlayer
-        ref={videoPlayerRef}
-        className={`player ${className}`}
-        url={src}
-        width="100%"
-        height={height}
-        playing={playing}
-        muted={muted}
-        volume={volume}
-        onProgress={progressHandler}
+    <div className="flex flex-col relative w-full">
+      <video
+        src={video?.video?.url}
+        className={`${className}`}
+        // controls
+        ref={vidRef}
+        muted={mute}
         onEnded={handleEnd}
-        onClickPreview={playClick}
       />
-      <VideoControl
-        onPlayPause={playPauseHandler}
-        playing={playing}
-        onForward={fastFowardHandler}
-        onRewind={rewindHandler}
-        played={played}
-        onSeek={seekHandler}
-        onSeekMouseUp={seekMouseUpHandler}
-        Volume={volume}
-        onVolumeChangeHandler={volumeChangeHandler}
-        onVolumeSeekUp={volumeSeekUpHandler}
-        mute={muted}
-        onMute={muteHandler}
-        duration={formatDuration}
-        currentTime={formatCurrentTime}
-        controlRef={controlRef}
-        hasEnded={ended}
-        onReplay={handleReplay}
-      />
+      <div className="absolute flex gap-2 w-full justify-center items-center my-auto inset-0">
+        {isPlaying ? (
+          <FaPause
+            className="cursor-pointer text-white"
+            size={30}
+            onClick={pause}
+          />
+        ) : (
+          <FaPlay
+            size={30}
+            className="cursor-pointer text-white"
+            onClick={play}
+          />
+        )}
+      </div>
+      {/* <div className="absolute p-[1rem] flex">
+        <GoDotFill size={25} className="text-white cursor-pointer" />
+      </div> */}
+      <div className="absolute flex p-[1rem] bottom-0 gap-[1rem]">
+        {!isPlaying && isFinished ? (
+          <IoMdRefresh
+            size={25}
+            className="text-white cursor-pointer"
+            onClick={handleReplay}
+          />
+        ) : (
+          ""
+        )}
+        <div className="flex gap-1">
+          {mute ? (
+            <BiSolidVolumeMute
+              size={25}
+              className="text-white cursor-pointer"
+              onClick={() => setMute(!mute)}
+            />
+          ) : (
+            <BiSolidVolumeFull
+              size={25}
+              className="text-white cursor-pointer"
+              onClick={() => setMute(!mute)}
+            />
+          )}
+        </div>
+        <Libography
+          fontSofia
+          text={formatTime(currentTime)}
+          className="text-white"
+        />
+      </div>
     </div>
   );
 };

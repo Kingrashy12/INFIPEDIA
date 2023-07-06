@@ -64,7 +64,7 @@ const ViewedPostComments = ({ post }) => {
     <StyledViewdCommentsForm className="shadow shadow-slate-400">
       <ViewedPostCommetsFlexBox>
         <ViwedCommentsFormImg
-          src={user?.userProfile?.url || PlaceholderImage}
+          src={user?.uProfile?.url || PlaceholderImage}
           alt="User-Profile"
         />
         <Textarea

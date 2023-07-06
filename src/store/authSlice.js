@@ -15,10 +15,12 @@ const initialState = {
     : "",
   FetcStatus: null,
   FetchError: null,
-  userProfile: localStorage.getItem("userProfile")
+  uProfile: localStorage.getItem("userProfile")
     ? JSON.parse(localStorage.getItem("userProfile"))
     : "",
-
+  // userProfile: localStorage.getItem("userProfile")
+  //   ? JSON.parse(localStorage.getItem("userProfile"))
+  //   : "",
   registerStatus: "",
   registerError: "",
   loginStatus: "",

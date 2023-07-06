@@ -67,9 +67,7 @@ const Comments = ({ setOpen, post, cId }) => {
 
         <Libography fontSofia text={c} />
         <FlexBetween>
-          <PostCommentsDImage
-            src={auth?.userProfile?.url || PlaceholderImage}
-          />
+          <PostCommentsDImage src={auth?.uProfile?.url || PlaceholderImage} />
           <Textarea
             placeholder="What your comment!"
             sx={{

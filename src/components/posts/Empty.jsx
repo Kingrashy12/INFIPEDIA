@@ -5,7 +5,7 @@ import { StyledEmptyBuk } from "../../styles/components/post/empty.styled";
 
 const Empty = ({ name, extra, emptyText }) => {
   return (
-    <StyledEmptyBuk className="flex flex-col w-full relative">
+    <StyledEmptyBuk className="flex flex-col w-full relative mt-5">
       <GiEmptyMetalBucketHandle />
       <HeaderOne fontSofia text={emptyText} />
       <Libography

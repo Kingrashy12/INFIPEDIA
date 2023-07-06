@@ -100,7 +100,7 @@ const ShareForm = () => {
           size={28}
           onClick={Close}
         />
-        <StyledShareImg src={user?.userProfile?.url || PlaceholderImage} />
+        <StyledShareImg src={user?.uProfile?.url || PlaceholderImage} />
       </FlexBetween>
       <div className="pb-6 relative h-auto overflow-y-auto">
         <Textarea

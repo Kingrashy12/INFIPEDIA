@@ -42,3 +42,8 @@ export async function FetchUsersWhoLiked(videoId) {
   );
   return response?.data;
 }
+
+export async function FetchTrendingVideos() {
+  const response = await axios.get(`${BASE_URL}/videos/trend/all`);
+  return response?.data;
+}

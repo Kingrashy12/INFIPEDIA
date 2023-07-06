@@ -45,7 +45,7 @@ const VideoCommentsForm = ({ video, Loading }) => {
           <Skeleton variant="circular" width="55px" height="50px" />
         ) : (
           <ViwedCommentsFormImg
-            src={user?.userProfile?.url || PlaceholderImage}
+            src={user?.uProfile?.url || PlaceholderImage}
             alt="User-Profile"
           />
         )}

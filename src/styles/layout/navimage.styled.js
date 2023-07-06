@@ -14,6 +14,7 @@ const StyledNavImage = styled.img`
 const FlexBox = styled.div`
   display: flex;
   gap: 1rem;
+  position: relative;
 `;
 
 const StyledMobileNav = styled.nav`
@@ -39,6 +40,7 @@ const MobileNavWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
 `;
 
 export { StyledNavImage, StyledMobileNav, MobileNavWrapper, FlexBox };

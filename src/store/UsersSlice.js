@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 const initialState = {
   list: [],
   requestedUser: [],
+  recent: localStorage.getItem("recent")
+    ? JSON.parse(localStorage.getItem("recent"))
+    : [],
   singleStatus: null,
   singleError: null,
   fetchStatus: null,
@@ -63,7 +66,21 @@ export const FollowUser = createAsyncThunk(
 const UsersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    addRecent: (state, action) => {
+      state.recent.push(action.payload);
+      localStorage.setItem("recent", JSON.stringify(action.payload));
+    },
+    removeRecent: (state, action) => {
+      const updatedRecent = state.recent.filter(
+        (item) => item._id !== action.payload._id
+      );
+      state.recent = updatedRecent;
+    },
+    // removeAllRecent: (state) => {
+    //   state.recent = [];
+    // },
+  },
   extraReducers: (builder) => {
     builder.addCase(FetchAllUsers.pending, (state, action) => {
       return { ...state, fetchStatus: "pending" };
@@ -106,5 +123,7 @@ const UsersSlice = createSlice({
     });
   },
 });
+
+export const { addRecent, removeRecent } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

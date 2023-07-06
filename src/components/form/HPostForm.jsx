@@ -85,7 +85,7 @@ const HPostForm = () => {
     <StyledViewdCommentsForm className="shadow shadow-slate-400">
       <ViewedPostCommetsFlexBox>
         <ViwedCommentsFormImg
-          src={auth?.userProfile?.url || PlaceholderImage}
+          src={auth?.uProfile?.url || PlaceholderImage}
           alt="User-Profile"
         />
         <Textarea
