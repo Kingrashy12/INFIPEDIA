@@ -11,6 +11,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { useSearchModal } from "../../hooks";
 import { useSelector } from "react-redux";
 import { getNotification } from "../../hooks/getUserById";
+import { getUnreadNotification } from "../../helper/fetch";
 
 const BottomNav = () => {
   const path = useLocation();
@@ -24,11 +25,8 @@ const BottomNav = () => {
   useEffect(() => {
     const fetchUnreadNotifications = async () => {
       try {
-        const data = await getNotification(userId);
-        const notifications = data.filter(
-          (notification) => !notification.isRead
-        );
-        setUnreadNotifications(notifications);
+        const data = await getUnreadNotification(auth?.username);
+        setUnreadNotifications(data);
       } catch (error) {
         console.error(error);
       }
@@ -42,7 +40,8 @@ const BottomNav = () => {
       // Clean up interval on component unmount
       return () => clearInterval(interval);
     };
-  }, []);
+    fetchUnreadNotifications();
+  });
 
   return (
     <StyledBottom className="fixed bottom-0 w-full bg-white shadow shadow-slate-700 p-[8px] max-[2560px]:hidden max-[700px]:block">

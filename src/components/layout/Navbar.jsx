@@ -14,6 +14,7 @@ import { ReadNotification, getNotification } from "../../hooks/getUserById";
 import NotificationModel from "../models/NotificationModel";
 import { PlaceholderImage } from "../../asset";
 import { Badge } from "@mui/material";
+import { getUnreadNotification } from "../../helper/fetch";
 
 const Navbar = () => {
   const scrollDirection = useScrollDirection("down");
@@ -24,16 +25,15 @@ const Navbar = () => {
   const [unreadNotifications, setUnreadNotifications] = useState([]);
 
   const userId = auth?._id;
+  const username = auth.username;
   const [open, setOpen] = useState(false);
+  console.log("Unread:", unreadNotifications);
 
   useEffect(() => {
     const fetchUnreadNotifications = async () => {
       try {
-        const data = await getNotification(userId);
-        const notifications = data.filter(
-          (notification) => notification.isRead === false
-        );
-        setUnreadNotifications(notifications);
+        const data = await getUnreadNotification(username);
+        setUnreadNotifications(data);
       } catch (error) {
         console.error(error);
       }
@@ -47,7 +47,8 @@ const Navbar = () => {
       // Clean up interval on component unmount
       return () => clearInterval(interval);
     };
-  }, []);
+    fetchUnreadNotifications();
+  });
 
   async function openAlert() {
     setOpen(true);
@@ -79,10 +80,8 @@ const Navbar = () => {
       {opennav && <MobileSideNav setOpennav={setOpennav} />}
       {auth?._id ? (
         <FlexBetween hideOnMobile onClick={openAlert}>
-          {/* <IconBadge content={unreadNotifications.length} /> */}
-          <Badge badgeContent={unreadNotifications.length} color="error">
-            <FaBell size={25} color="#000" className="cursor-pointer" />
-          </Badge>
+          <IconBadge content={unreadNotifications.length} />
+          <FaBell size={25} color="#000" className="cursor-pointer" />
         </FlexBetween>
       ) : (
         ""

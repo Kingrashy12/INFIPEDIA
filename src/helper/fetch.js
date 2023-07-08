@@ -52,3 +52,8 @@ export async function getCommunity(slug) {
   const response = await axios.get(`${BASE_URL}/community/one/${slug}`);
   return response?.data;
 }
+
+export async function getUnreadNotification(username) {
+  const response = await axios.get(`${BASE_URL}/notification/get/${username}`);
+  return response?.data;
+}
