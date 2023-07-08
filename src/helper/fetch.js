@@ -47,3 +47,8 @@ export async function FetchTrendingVideos() {
   const response = await axios.get(`${BASE_URL}/videos/trend/all`);
   return response?.data;
 }
+
+export async function getCommunity(slug) {
+  const response = await axios.get(`${BASE_URL}/community/one/${slug}`);
+  return response?.data;
+}

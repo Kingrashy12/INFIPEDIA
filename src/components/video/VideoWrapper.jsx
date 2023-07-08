@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Libography, Span, Video } from "../../libs";
+import { Libography, Span, Video, VideoPlayer } from "../../libs";
 import { Skeleton } from "@mui/material";
 import { StyledVideoWrapper } from "../../styles/components/video/videoitem.styled";
 import UImge from "../user/UImge";

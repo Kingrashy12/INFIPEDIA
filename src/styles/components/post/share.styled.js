@@ -22,5 +22,16 @@ const StyledShareCircle = styled.div`
   position: relative;
   color: #fff;
 `;
+const StyledLoginCircle = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  color: #fff;
+`;
 
-export { StyledShare, StyledShareCircle };
+export { StyledShare, StyledShareCircle, StyledLoginCircle };

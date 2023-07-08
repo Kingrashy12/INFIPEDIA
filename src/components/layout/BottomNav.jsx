@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ActiveLinkBottom, IconBadge } from "../../libs";
-import { HiHome } from "react-icons/hi";
+import { HiHome, HiOutlineHome } from "react-icons/hi";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { FlexBetween } from "../../styles/common/Global";
-import { MdVideoLibrary } from "react-icons/md";
+import { FlexBetween, SpaceEvenly } from "../../styles/common/Global";
+import { MdVideoLibrary, MdOutlineVideoLibrary } from "react-icons/md";
 import { videosdata } from "../../data/videos";
-import { IoNotifications } from "react-icons/io5";
+import { IoNotifications, IoNotificationsOutline } from "react-icons/io5";
 import { StyledBottom } from "../../styles/layout/Bottom.styled";
 import { RiSearchLine } from "react-icons/ri";
 import { useSearchModal } from "../../hooks";
@@ -45,18 +45,20 @@ const BottomNav = () => {
   }, []);
 
   return (
-    <StyledBottom className="fixed bottom-0 w-full bg-white shadow shadow-black p-[6px] max-[2560px]:hidden max-[700px]:block">
-      <FlexBetween>
+    <StyledBottom className="fixed bottom-0 w-full bg-white shadow shadow-slate-700 p-[8px] max-[2560px]:hidden max-[700px]:block">
+      <SpaceEvenly>
         <Link to="/" className="relative">
-          <HiHome size={26} className="icon" />
-          {path.pathname === "/" ? <ActiveLinkBottom /> : <div className="" />}
+          {path.pathname === "/" ? (
+            <HiHome size={26} className="icon" />
+          ) : (
+            <HiOutlineHome size={26} className="icon" />
+          )}
         </Link>
         <Link to="/videos" className="relative">
-          <MdVideoLibrary size={26} className="icon" />
           {path.pathname === "/videos" ? (
-            <ActiveLinkBottom />
+            <MdVideoLibrary size={26} className="icon" />
           ) : (
-            <div className="" />
+            <MdOutlineVideoLibrary size={26} className="icon" />
           )}
         </Link>
 
@@ -64,14 +66,13 @@ const BottomNav = () => {
 
         <Link to={null} className="relative">
           <IconBadge content={unreadNotifications.length} />
-          <IoNotifications size={26} className="icon" />
-          {path.pathname === `${null}` ? (
-            <ActiveLinkBottom />
+          {path.pathname === `/notification` ? (
+            <IoNotifications size={26} className="icon" />
           ) : (
-            <div className="" />
+            <IoNotificationsOutline size={26} className="icon" />
           )}
         </Link>
-      </FlexBetween>
+      </SpaceEvenly>
     </StyledBottom>
   );
 };

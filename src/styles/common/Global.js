@@ -11,4 +11,11 @@ const FlexBetween = styled.div`
   }
 `;
 
-export { FlexBetween };
+const SpaceEvenly = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  gap: 2rem;
+`;
+
+export { FlexBetween, SpaceEvenly };

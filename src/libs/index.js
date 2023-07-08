@@ -35,3 +35,5 @@ export { default as CustomVideo } from "./components/CustomeVideo";
 export { default as DateFormatter } from "./DateFormatter";
 export { default as BackDrop } from "./components/BackDrop";
 export { default as IconBadge } from "./components/IconBadge";
+export { default as VideoPlayer } from "./components/video/Video";
+export { default as CommunityUpload } from "./form/CommunityUpload";

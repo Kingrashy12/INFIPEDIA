@@ -11,6 +11,17 @@ const StyledCommunityFeed = styled.section`
   z-index: 0;
 `;
 
+const StyledAddBTN = styled.div`
+  position: fixed;
+  bottom: 5rem;
+  right: 1.3rem;
+  display: none;
+
+  @media screen and (max-width: 700px) {
+    display: flex;
+  }
+`;
+
 const CommunitySearchWrapper = styled.div`
   position: relative;
   display: flex;
@@ -30,4 +41,9 @@ const CommunitysearchInput = styled.input`
   background: transparent;
 `;
 
-export { StyledCommunityFeed, CommunitySearchWrapper, CommunitysearchInput };
+export {
+  StyledCommunityFeed,
+  CommunitySearchWrapper,
+  CommunitysearchInput,
+  StyledAddBTN,
+};

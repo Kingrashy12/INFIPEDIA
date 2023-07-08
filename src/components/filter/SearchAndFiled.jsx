@@ -14,7 +14,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { PlaceholderImage } from "../../asset";
 import { HeaderOne, Libography } from "../../libs";
 import { useNavigate } from "react-router-dom";
-import { addRecent, removeRecent } from "../../store/UsersSlice";
+import {
+  addRecent,
+  removeAllRecent,
+  removeRecent,
+} from "../../store/UsersSlice";
 import { AiFillDelete } from "react-icons/ai";
 
 const SearchAndFiled = () => {
@@ -37,12 +41,7 @@ const SearchAndFiled = () => {
     navigate(`/${user.username}`);
     Close();
   }
-  // function removeOne(user) {
-  //   dispatch(removeRecent(user._id));
-  // }
-  // function clearAll() {
-  //   dispatch(removeAllRecent());
-  // }
+
   return (
     <StyledSearchForm>
       <FlexBetween>
@@ -100,14 +99,19 @@ const SearchAndFiled = () => {
           ))}
         {!query && (
           <StyledRecentConrainer>
-            <FlexBetween>
+            <FlexBetween className="items-center">
               <HeaderOne
                 fontSofia
                 text="Recent"
                 className="text-[26px]"
                 fontBold
               />
-              <Libography fontSofia text="Clear all" className="underline" />
+              <Libography
+                fontSofia
+                text="Clear all"
+                className="underline text-blue-600 text-[17px]"
+                onClick={() => dispatch(removeAllRecent())}
+              />
             </FlexBetween>
             <hr />
             {recent &&

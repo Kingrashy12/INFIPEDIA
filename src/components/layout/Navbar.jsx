@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { FaBell } from "react-icons/fa";
 import { ReadNotification, getNotification } from "../../hooks/getUserById";
 import NotificationModel from "../models/NotificationModel";
+import { PlaceholderImage } from "../../asset";
+import { Badge } from "@mui/material";
 
 const Navbar = () => {
   const scrollDirection = useScrollDirection("down");
@@ -29,7 +31,7 @@ const Navbar = () => {
       try {
         const data = await getNotification(userId);
         const notifications = data.filter(
-          (notification) => !notification.isRead
+          (notification) => notification.isRead === false
         );
         setUnreadNotifications(notifications);
       } catch (error) {
@@ -66,12 +68,21 @@ const Navbar = () => {
         </Link>
         <SearchInput />
       </FlexBetween>
-      <MobileNavImage user={auth} onClick={() => setOpennav(true)} />
+      {auth?._id ? (
+        <MobileNavImage user={auth} onClick={() => setOpennav(true)} />
+      ) : (
+        <MobileNavImage
+          user={PlaceholderImage}
+          onClick={() => setOpennav(true)}
+        />
+      )}
       {opennav && <MobileSideNav setOpennav={setOpennav} />}
       {auth?._id ? (
         <FlexBetween hideOnMobile onClick={openAlert}>
-          <IconBadge content={unreadNotifications.length} />
-          <FaBell size={25} color="#000" className="cursor-pointer" />
+          {/* <IconBadge content={unreadNotifications.length} /> */}
+          <Badge badgeContent={unreadNotifications.length} color="error">
+            <FaBell size={25} color="#000" className="cursor-pointer" />
+          </Badge>
         </FlexBetween>
       ) : (
         ""

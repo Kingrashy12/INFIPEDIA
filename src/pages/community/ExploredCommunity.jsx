@@ -5,32 +5,33 @@ import { StyledCommunity } from "../../styles/pages/community.styled";
 import axios from "axios";
 import { BASE_URL } from "../../hooks/api";
 import { useParams } from "react-router-dom";
+import { getCommunity } from "../../helper/fetch";
 
 const ExploredCommunity = () => {
-  const { communityId } = useParams();
+  const { slug } = useParams();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getExplored = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get(`${BASE_URL}/community/${communityId}`);
-      const fetched = await response?.data;
-      setData(fetched);
-      console.log("community here:", fetched);
-    } catch (error) {
-      console.log({ error: error.message });
-    } finally {
-      setIsLoading(false);
-    }
-  }, [communityId]);
-
   useEffect(() => {
+    const getExplored = async () => {
+      setIsLoading(true);
+      try {
+        const data = await getCommunity(slug);
+        setData(data);
+        console.log("community here:", data);
+      } catch (error) {
+        console.log({ error: error.message });
+      } finally {
+        setIsLoading(false);
+      }
+    };
     getExplored();
-  }, [getExplored]);
+  }, [slug]);
 
   useEffect(() => {
-    document.title = `${data.cname} Community - Infipedia`;
+    document.title = `${
+      isLoading ? "Loading..." : data.cname
+    } Community - Infipedia`;
   });
   return (
     <StyledCommunity>

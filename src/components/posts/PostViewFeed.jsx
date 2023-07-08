@@ -11,8 +11,8 @@ import { HeaderOne } from "../../libs";
 import { useSelector } from "react-redux";
 import { FetchPostComments, FetchPostLikes } from "../../helper/fetch";
 
-const PostViewFeed = ({ post, isLoading }) => {
-  const postId = post._id;
+const PostViewFeed = ({ post, isLoading, postId }) => {
+  // const postId = post?._id
   const scroll = useScrollDirection();
   const user = useSelector((state) => state.credentails);
   const [pcomments, setPcomments] = useState([]);

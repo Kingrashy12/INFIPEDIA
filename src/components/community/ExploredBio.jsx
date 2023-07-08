@@ -1,15 +1,24 @@
 import React from "react";
 import { StyledExploredBio } from "../../styles/components/community/explored.styled";
-import { Button, HeaderOne, Image, Libography, Span } from "../../libs";
+import {
+  Button,
+  DateFormatter,
+  HeaderOne,
+  Image,
+  Libography,
+  Span,
+} from "../../libs";
 import { FlexBetween } from "../../styles/common/Global";
-import { Male } from "../../asset";
+import { Male, PlaceholderImage } from "../../asset";
 
 const ExploredBio = ({ data, isLoading }) => {
   const memeber = 134789;
-  const user = {
-    name: data.uname,
-    username: data.uUsername,
-  };
+  const created = (
+    <div className="flex gap-1 items-center">
+      <Libography text="Organised:" />
+      <DateFormatter item={data} className="translate-y-0 text-black" />
+    </div>
+  );
   return (
     <StyledExploredBio>
       <FlexBetween>
@@ -42,7 +51,7 @@ const ExploredBio = ({ data, isLoading }) => {
         <Libography
           fontSemiBold
           fontSofia
-          text="Organised: May 2023"
+          text={created}
           className="text-sm text-neutral-500"
           isLoading={isLoading}
           loadingHeight={"30px"}
@@ -51,7 +60,7 @@ const ExploredBio = ({ data, isLoading }) => {
         <Libography
           fontSemiBold
           fontSofia
-          text={`Members: ${memeber.toLocaleString()}`}
+          text={`Members: ${data.members?.length.toLocaleString()}`}
           className="text-sm text-neutral-500"
           isLoading={isLoading}
           loadingHeight={"30px"}
@@ -69,7 +78,7 @@ const ExploredBio = ({ data, isLoading }) => {
       />
       <div className="flex gap-2 items-center">
         <Image
-          src={data?.uProfile || Male}
+          src={data?.owner?.userProfile?.url || PlaceholderImage}
           className="w-16 h-16 rounded-full border border-black"
           isLoading={isLoading}
           loadingHeight={"4rem"}
@@ -79,7 +88,7 @@ const ExploredBio = ({ data, isLoading }) => {
           <Libography
             fontSemiBold
             fontSofia
-            text={data.uname}
+            text={data.owner?.name}
             isLoading={isLoading}
             loadingWidth={"150px"}
             loadingHeight={"35px"}
@@ -87,7 +96,7 @@ const ExploredBio = ({ data, isLoading }) => {
           <Libography
             fontSemiBold
             fontSofia
-            text={`@ ${data.uUsername}`}
+            text={`@ ${data.owner?.username}`}
             className="text-sm text-neutral-500"
             isLoading={isLoading}
             loadingHeight={"30px"}

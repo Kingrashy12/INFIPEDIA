@@ -3,7 +3,7 @@ import {
   ExploredCover,
   ExploredProfile,
 } from "../../styles/components/community/explored.styled";
-import { Male } from "../../asset";
+import { Male, PlaceholderImage } from "../../asset";
 import { Skeleton } from "@mui/material";
 
 const ExploredHero = ({ data, isLoading }) => {
@@ -12,7 +12,10 @@ const ExploredHero = ({ data, isLoading }) => {
       {isLoading ? (
         <Skeleton variant="rectangular" width={`100%`} height={`30rem`} />
       ) : (
-        <ExploredCover src={data?.cCover || Male} alt="Community Cover" />
+        <ExploredCover
+          src={data?.ccover || PlaceholderImage}
+          alt="Community Cover"
+        />
       )}
       {isLoading ? (
         <Skeleton
@@ -22,7 +25,10 @@ const ExploredHero = ({ data, isLoading }) => {
           sx={{ bottom: "-2.3rem", position: "absolute", left: "4rem" }}
         />
       ) : (
-        <ExploredProfile src={data?.cProfile || Male} alt="Community Profile" />
+        <ExploredProfile
+          src={data?.cprofile || PlaceholderImage}
+          alt="Community Profile"
+        />
       )}
     </div>
   );

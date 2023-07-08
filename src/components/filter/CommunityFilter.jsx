@@ -6,9 +6,11 @@ import {
 import CommunitySearchInput from "../form/CommunitySearchInput";
 import { Button } from "../../libs";
 import NewCommunity from "../models/NewCommunity";
+import { useNewCModal } from "../../hooks";
 
 const CommunityFilter = () => {
   const [open, setOpen] = useState(false);
+  const newcom = useNewCModal();
   return (
     <CFilterWrapper className="border-b border-b-neutral-400">
       {open && (
@@ -18,11 +20,7 @@ const CommunityFilter = () => {
       )}
       <CFilterContainer>
         <CommunitySearchInput />
-        <Button
-          isCurrentBg
-          text="Create Community"
-          onClick={() => setOpen(true)}
-        />
+        <Button isCurrentBg text="Create Community" onClick={newcom.onOpen} />
       </CFilterContainer>
     </CFilterWrapper>
   );

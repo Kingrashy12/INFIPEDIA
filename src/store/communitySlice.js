@@ -32,13 +32,10 @@ export const CreateNewCommunity = createAsyncThunk(
     try {
       const response = await axios.post(`${BASE_URL}/community/new`, {
         userId: form.userId,
-        uUsername: form.uUsername,
-        uname: form.uname,
-        uProfile: form.uProfile,
         cname: form.cname,
-        cProfile: form.cProfile,
-        cCover: form.cCover,
-        cCat: form.cCat,
+        cprofile: form.cprofile,
+        ccover: form.ccover,
+        cdesc: form.cdesc,
       });
       return response?.data;
     } catch (error) {
@@ -50,9 +47,9 @@ export const CreateNewCommunity = createAsyncThunk(
 
 export const ExploreCommunity = createAsyncThunk(
   "community/explore",
-  async (id, { rejectWithValue }) => {
+  async (slug, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE_URL}/community/${id}`);
+      const response = await axios.get(`${BASE_URL}/community/one/${slug}`);
       return response?.data;
     } catch (error) {
       console.log({ error: error.message });
@@ -79,7 +76,8 @@ const CommunitySlice = createSlice({
       return { ...state, createStatus: "pending" };
     });
     builder.addCase(CreateNewCommunity.fulfilled, (state, action) => {
-      return { ...state, createStatus: "success" };
+      // const updatedstate = state.lists.unshift(action.payload);
+      return { ...state, lists: action.payload, createStatus: "success" };
     });
     builder.addCase(CreateNewCommunity.rejected, (state, action) => {
       return {
@@ -102,6 +100,42 @@ const CommunitySlice = createSlice({
       };
     });
   },
+  // extraReducers: {
+  //   [FetchAllCommunity.pending]: (state, action) => {
+  //     state.fetchStatus = "pending";
+  //   },
+  //   [FetchAllCommunity.fulfilled]: (state, action) => {
+  //     state.fetchStatus = "success";
+  //     state.lists = action.payload;
+  //   },
+  //   [FetchAllCommunity.rejected]: (state, action) => {
+  //     state.fetchError = action.payload;
+  //     state.fetchStatus = "rejected";
+  //   },
+  //   [CreateNewCommunity.pending]: (state, action) => {
+  //     state.createStatus = "pending";
+  //   },
+  //   [CreateNewCommunity.fulfilled]: (state, action) => {
+  //     state.createStatus = "success";
+  //     // const updatedstate = state.lists.unshift(action.payload);
+  //     // state.lists = updatedstate;
+  //   },
+  //   [CreateNewCommunity.rejected]: (state, action) => {
+  //     state.createStatus = "rejected";
+  //     state.createError = action.payload;
+  //   },
+  //   [ExploreCommunity.pending]: (state, action) => {
+  //     state.exploredStatus = "pending";
+  //   },
+  //   [ExploreCommunity.fulfilled]: (state, action) => {
+  //     state.exploredStatus = "success";
+  //     state.explored = action.payload;
+  //   },
+  //   [ExploreCommunity.rejected]: (state, action) => {
+  //     state.exploredStatus = "rejected";
+  //     state.exploredError = action.payload;
+  //   },
+  // },
 });
 
 export default CommunitySlice.reducer;

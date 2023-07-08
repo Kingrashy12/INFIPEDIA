@@ -14,6 +14,7 @@ import communityReducer, { FetchAllCommunity } from "./store/communitySlice";
 import { communityApi } from "./store/communityApi";
 import chatReducer from "./store/chatSlice";
 import TrendReducer, { getTrends } from "./store/TrendSlice";
+import { BrowserRouter } from "react-router-dom";
 
 const store = configureStore({
   reducer: {
@@ -43,8 +44,10 @@ store.dispatch(loadUser(null));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,0 +1,7 @@
+.video-wrapper .custom-controls {
+  display: none;
+}
+
+.video-wrapper.show-controls .custom-controls {
+  display: flex;
+}

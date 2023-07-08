@@ -35,7 +35,7 @@ const PostView = () => {
   return (
     <StyledviewWrapper>
       <SideNavII />
-      <PostViewFeed post={post} isLoading={isLoading} />
+      <PostViewFeed post={post} postId={postId} isLoading={isLoading} />
       <RightNav />
     </StyledviewWrapper>
   );

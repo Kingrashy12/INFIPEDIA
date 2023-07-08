@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HeaderOne, Popup } from "../../libs";
+import { BackDrop, HeaderOne, Popup } from "../../libs";
 import { Backdrop } from "@mui/material";
 import FormJS from "../community/FormJS";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { CreateNewCommunity } from "../../store/communitySlice";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../../hooks/api";
+import { useNewCModal } from "../../hooks";
 
 const NewCommunity = ({ open, close }) => {
   const auth = useSelector((state) => state.credentails);
@@ -15,19 +16,24 @@ const NewCommunity = ({ open, close }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     cname: "",
-    cProfile: "",
+    cprofile: "",
     cCover: "",
-    cCat: "",
+    cdesc: "",
     userId: auth?._id,
-    uname: auth?.name,
-    uProfile: auth?.userProfile,
-    uUsername: auth?.username,
   });
   console.log("on state:", form);
 
-  async function handleCreate() {
+  const newcommunity = useNewCModal();
+  const isopen = newcommunity.isOpen;
+  function Close() {
+    newcommunity.onClose();
+  }
+
+  async function handleCreate(e) {
     dispatch(CreateNewCommunity(form));
-    close();
+    setTimeout(() => {
+      Close();
+    }, 5000);
     // setIsLoading(true);
     // try {
     //   await axios.post(`${BASE_URL}/community/new`, {
@@ -53,23 +59,10 @@ const NewCommunity = ({ open, close }) => {
   }
   const body = (
     <div className="flex flex-col w-full justify-center items-center">
-      <FormJS form={form} setForm={setForm} />
+      <FormJS form={form} setForm={setForm} Submit={handleCreate} />
     </div>
   );
-  return (
-    <Backdrop open={open} sx={{ zIndex: 99 }}>
-      <Popup
-        header="New Community"
-        open={open}
-        body={body}
-        actionLabel="Continue"
-        onClose={close}
-        onFormSubmit={handleCreate}
-        // isLoading={isLoading}
-        isLoading={c === "pending"}
-      />
-    </Backdrop>
-  );
+  return <>{isopen && <BackDrop children={body} />}</>;
 };
 
 export default NewCommunity;

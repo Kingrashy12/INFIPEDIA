@@ -1,5 +1,5 @@
 import React from "react";
-import { Male } from "../../asset";
+import { Male, PlaceholderImage } from "../../asset";
 import { Button, HeaderOne, Libography, Span } from "../../libs";
 import { useDispatch } from "react-redux";
 import { ExploreCommunity } from "../../store/communitySlice";
@@ -11,22 +11,23 @@ const CommunityItem = ({ item }) => {
   const mem = (
     <div className="flex gap-1">
       <Libography text="Members:" />
-      <Span text="12" />
+      <Span text={item?.members?.length} />
     </div>
   );
 
-  const id = item.cid;
+  // function join() {}
 
   function explore() {
-    dispatch(ExploreCommunity(id));
-    navigate(`/community/${item.cid}`);
+    // dispatch(ExploreCommunity(slug));
+    navigate(`/community/${item.slug}`);
   }
   return (
     <div className="flex flex-col bg-slate-200 h-auto w-44 shadow shadow-black relative rounded-lg z-0">
       <img
-        src={item?.cProfile || Male}
+        src={item?.cprofile || PlaceholderImage}
         alt="Community"
-        className="rounded-t-lg h-32"
+        className="rounded-t-lg h-32 cursor-pointer"
+        onClick={explore}
       />
       <div className="flex flex-col bg-white p-2 gap-3 rounded-b-lg">
         <HeaderOne
@@ -43,7 +44,7 @@ const CommunityItem = ({ item }) => {
         />
         <Libography fontSemiBold fontShareMono className="text-sm" text={mem} />
         <Button text="Join" secondary />
-        <Button text="Explore" outlined onClick={explore} />
+        {/* <Button text="Explore" outlined onClick={explore} /> */}
       </div>
     </div>
   );

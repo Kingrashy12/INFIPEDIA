@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { StyledTrend } from "../../../styles/components/post/trend/trend.styled";
-import { HeaderOne } from "../../../libs";
+import { Button, HeaderOne } from "../../../libs";
 import { getTrends } from "../../../hooks/getUserById";
 import TrendPostsItem from "./TrendPostsItem";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Error from "../Error";
+import { useNavigate } from "react-router-dom";
 
 const Trend = () => {
+  const navigate = useNavigate();
   const [trendData, setTrend] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -39,8 +41,16 @@ const Trend = () => {
           <Error />
         </div>
       ) : (
-        trendData?.map((trend) => <TrendPostsItem trend={trend} />)
+        trendData?.map((trend) => <TrendPostsItem trend={trend} />).slice(0, 2)
       )}
+      <div className="p-4">
+        <Button
+          text="Show more"
+          secondary
+          fullWidth
+          onClick={() => navigate("/trending")}
+        />
+      </div>
     </StyledTrend>
   );
 };

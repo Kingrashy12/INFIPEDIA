@@ -7,6 +7,10 @@ const CFilterWrapper = styled.nav`
   background: #fff;
   top: -2px;
   z-index: 93;
+
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 
 const CFilterContainer = styled.div`

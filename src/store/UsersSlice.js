@@ -68,7 +68,7 @@ const UsersSlice = createSlice({
   initialState,
   reducers: {
     addRecent: (state, action) => {
-      state.recent.push(action.payload);
+      state.recent.unshift(action.payload);
       localStorage.setItem("recent", JSON.stringify(action.payload));
     },
     removeRecent: (state, action) => {
@@ -77,9 +77,10 @@ const UsersSlice = createSlice({
       );
       state.recent = updatedRecent;
     },
-    // removeAllRecent: (state) => {
-    //   state.recent = [];
-    // },
+    removeAllRecent: (state) => {
+      state.recent = [];
+      localStorage.removeItem("recent");
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(FetchAllUsers.pending, (state, action) => {
@@ -124,6 +125,6 @@ const UsersSlice = createSlice({
   },
 });
 
-export const { addRecent, removeRecent } = UsersSlice.actions;
+export const { addRecent, removeRecent, removeAllRecent } = UsersSlice.actions;
 
 export default UsersSlice.reducer;
