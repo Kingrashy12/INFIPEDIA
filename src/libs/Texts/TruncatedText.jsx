@@ -41,7 +41,7 @@ const TruncatedText = ({
         />
       ) : (
         <div className="flex flex-col">
-          <p
+          <pre
             onClick={onClick}
             target={target}
             rel={rel}
@@ -56,7 +56,7 @@ const TruncatedText = ({
             } ${fontPoppins && "font-poppin"} ${fontShare && "font-share"}`}
           >
             {textReducer}
-          </p>
+          </pre>
           <p
             onClick={underClick}
             className="cursor-pointer hover:underline font-semibold p-[1px]"
