@@ -1,6 +1,13 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import ReactGA from "react-ga";
 import {
   AccountSetting,
   Chat,
@@ -44,11 +51,17 @@ import { useEffect } from "react";
 function App() {
   const user = useSelector((state) => state.credentails);
   const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     if (!user?._id) {
       navigate("/auth/login");
     }
   }, []);
+  useEffect(() => {
+    // Track pageview when the route changes
+    ReactGA.pageview(location.pathname + location.search);
+  }, [location]);
+  ReactGA.initialize("G-X1XS1S0YHC", { gaOptions: { userId: user?._id } });
   const theme = {
     tab: "1024px",
     Minitab: "800px",

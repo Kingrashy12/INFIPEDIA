@@ -21,6 +21,11 @@ module.exports = {
       },
       colors: {
         navy: "rgba(2, 12, 27, 1)",
+        trans: "rgba(0, 0, 0, 0.5)",
+        current: "#f95f35",
+      },
+      backgroundColor: {
+        "Bg-current": "linear-gradient(98.63deg, #f99827 0%, #f95f35 100%)",
       },
       height: {
         "50%": "75%",
