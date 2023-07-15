@@ -61,7 +61,7 @@ function App() {
     // Track pageview when the route changes
     ReactGA.pageview(location.pathname + location.search);
   }, [location]);
-  ReactGA.initialize("G-X1XS1S0YHC", { gaOptions: { userId: user?._id } });
+  ReactGA.initialize("G-S8R6F73RH9", { gaOptions: { userId: user?._id } });
   const theme = {
     tab: "1024px",
     Minitab: "800px",
