@@ -95,13 +95,17 @@ const RegisterModel = () => {
         className="font-semibold font-sofia cursor-pointer text-blue-600 hover:underline"
         onClick={() => navigate("/auth/login")}
       />
+      <Libography
+        text={auth.registerError?.error || auth.registerError}
+        className="font-semibold font-sofia cursor-pointer text-red-600"
+      />
 
       <Button
         onClick={handleSubmit}
-        disabled={!user.email || !user.password}
+        disabled={!user.email || !user.password || isLoading}
         className="bg-blue-600 disabled:cursor-not-allowed w-full"
       >
-        {auth.loginStatus === "pending" ? <ClipLoader size={23} /> : "Register"}
+        {isLoading ? <ClipLoader size={23} /> : "Register"}
       </Button>
     </div>
   );

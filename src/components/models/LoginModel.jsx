@@ -71,10 +71,13 @@ const LoginModel = () => {
         className="font-semibold font-sofia cursor-pointer text-blue-600 hover:underline"
         onClick={() => navigate("/auth/signup")}
       />
-
+      <Libography
+        text={auth.loginError?.error || auth.loginError}
+        className="font-semibold font-sofia cursor-pointer text-red-600"
+      />
       <Button
         onClick={handleLogin}
-        disabled={!user.email || !user.password}
+        disabled={!user.email || !user.password || isLoading}
         className="bg-blue-600 disabled:cursor-not-allowed w-full"
       >
         {isLoading ? <ClipLoader size={23} /> : "Login"}
