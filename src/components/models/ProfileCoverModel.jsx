@@ -15,6 +15,7 @@ const ProfileCoverModel = ({ setOpenCover }) => {
     userCover: "",
     userId: auth?._id,
   });
+  console.log("user:", user);
   function handleUpdate() {
     dispatch(UpdatedUserCover(user));
     if (auth.coverEditStatus === "success") {
@@ -22,26 +23,7 @@ const ProfileCoverModel = ({ setOpenCover }) => {
       window.location.reload();
     }
   }
-  const imgRef = useRef();
-  const [photo, setPhoto] = useState(null);
-  function handleImageUpload(e) {
-    const file = e.target.files[0];
-    console.log("user-cover", user);
-    console.log("photo:", photo);
-    TransFormFile(file);
-  }
-  function TransFormFile(file) {
-    const reader = new FileReader();
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        setPhoto(reader.result);
-        setUser({ ...user, userCover: reader.result });
-      };
-    } else {
-      setPhoto("");
-    }
-  }
+
   return (
     <ProfileModelStyle className="shadow shadow-black">
       <FlexBetween>
@@ -58,28 +40,7 @@ const ProfileCoverModel = ({ setOpenCover }) => {
         />
       </FlexBetween>
       <div className="flex items-center justify-center flex-col">
-        <div className="w-full">
-          {photo ? (
-            <img src={photo} className="w-full rounded-lg" alt="Avatar" />
-          ) : (
-            <div className="bg-slate-200 w-full p-3 h-28 rounded-lg flex items-center justify-center">
-              <FaFileImage
-                onClick={(e) => {
-                  imgRef.current.click();
-                }}
-                size={25}
-                className="text-blue-500 cursor-pointer"
-              />
-            </div>
-          )}
-          <input
-            type="file"
-            className="hidden"
-            ref={imgRef}
-            onChange={handleImageUpload}
-          />
-        </div>
-        {/* <CoverProfileUploadJs user={user} userData={setUser} /> */}
+        <CoverProfileUploadJs user={user} userData={setUser} />
       </div>
       <Button
         isCurrentBg

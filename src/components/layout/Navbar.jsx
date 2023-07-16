@@ -27,7 +27,6 @@ const Navbar = () => {
   const userId = auth?._id;
   const username = auth.username;
   const [open, setOpen] = useState(false);
-  console.log("Unread:", unreadNotifications);
 
   useEffect(() => {
     const fetchUnreadNotifications = async () => {
